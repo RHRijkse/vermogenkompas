@@ -4,7 +4,7 @@ Statische website. Open `index.html` via een lokale webserver; er is geen build 
 
 ## Hypotheekcalculator
 
-De calculator staat op `#hypotheek` en gebruikt `mortgage-engine.js`, `mortgage-norms.js`, `mortgage-ui.js` en `mortgage.css`. Invoer blijft in de browser. Downloaden maakt lokaal een tekstbestand; de bestaande kennismakingsfunctie verstuurt nog geen aanvragen.
+De calculator staat op `#hypotheek` en gebruikt `mortgage-engine.js`, `mortgage-norms.js`, `mortgage-ui.js` en `mortgage.css`. De twee invoerstappen vragen naar inkomen, hypotheekrente, looptijd en financiële verplichtingen. Een concrete woning is niet nodig. Invoer blijft in de browser. Downloaden maakt lokaal een tekstbestand; de bestaande kennismakingsfunctie verstuurt nog geen aanvragen.
 
 ### Rekenen en toetsen
 
@@ -31,4 +31,4 @@ Dit is een oriënterende annuïteitenberekening, geen acceptatie-engine van een 
 
 Voor AOW binnen tien jaar berekenen we alle combinaties van de opgegeven toekomstige pensioeninkomens. We kiezen de laagste leencapaciteit en rekenen voorzichtig met de oorspronkelijke hoofdsom en looptijd; toekomstige aflossing wordt niet meegenomen. Dit kan lager uitvallen dan een volledige toets bij de geldverstrekker. De aftrekkeuze geldt voor de volledige lening en looptijd. Gemengde leningdelen, een verstreken aftrektermijn en de bijleenregeling vereisen individueel advies.
 
-De bekende woningwaarde begrenst de lening op 100%. Kosten, overwaarde en eigen geld worden expliciet ingevoerd, zonder automatische fiscale aannames. Geen verduurzamingsdepots, seniorenmaatwerk, overbrugging, bestaande leningdelen, NHG-toelatingsbeslissing of netto-maandlastberekening. Het aflossingsschema veronderstelt dezelfde rente over de volledige looptijd.
+De getoonde indicatie is de inkomensgebonden leencapaciteit (LTI): toetsinkomen maal de toepasselijke financieringslastquote, verminderd met verplichtingen en omgerekend naar een annuïtaire lening. Zonder een specifieke woning worden de woningwaarde (LTV), energielabelruimte, aankoopkosten, eigen geld en overwaarde niet meegenomen. Geen verduurzamingsdepots, seniorenmaatwerk, overbrugging, bestaande leningdelen, NHG-toelatingsbeslissing of netto-maandlastberekening. Het aflossingsschema veronderstelt dezelfde rente over de volledige looptijd.
