@@ -2,9 +2,11 @@
 
 Statische website. Open `index.html` via een lokale webserver; er is geen build of npm-installatie nodig. Publiceer alle HTML-, CSS- en JavaScriptbestanden uit de hoofdmap samen.
 
+De startpagina bevat de korte introductie, links naar vijf onderwerppagina's en het kennismakingsformulier. `hypotheek.html`, `woonwensen.html`, `overwaarde.html`, `aanpak.html` en `diensten.html` zijn afzonderlijk bereikbaar via de menubalk. De Woon & VermogenCheck staat op `woonwensen.html`; de hypotheekcalculator staat op `hypotheek.html`. Elke pagina heeft een knop naar het kennismakingsformulier op de startpagina. Het formulier bereidt alleen een download voor en verstuurt geen aanvraag.
+
 ## Hypotheekcalculator
 
-De calculator staat op `#hypotheek` en gebruikt `mortgage-engine.js`, `mortgage-norms.js`, `mortgage-ui.js` en `mortgage.css`. De twee invoerstappen vragen naar inkomen, hypotheekrente, looptijd en financiële verplichtingen. Een concrete woning is niet nodig. Invoer blijft in de browser. Downloaden maakt lokaal een tekstbestand; de bestaande kennismakingsfunctie verstuurt nog geen aanvragen.
+De calculator staat op `hypotheek.html#hypotheek` en gebruikt `mortgage-engine.js`, `mortgage-norms.js`, `mortgage-ui.js` en `mortgage.css`. De twee invoerstappen vragen naar inkomen, hypotheekrente, looptijd en financiële verplichtingen. Een concrete woning is niet nodig. Invoer blijft in de browser. Downloaden maakt lokaal een tekstbestand; de bestaande kennismakingsfunctie verstuurt nog geen aanvragen.
 
 ### Rekenen en toetsen
 
