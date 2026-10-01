@@ -37,4 +37,4 @@ De getoonde indicatie is de inkomensgebonden leencapaciteit (LTI): toetsinkomen 
 
 ## Informatiepagina’s
 
-De website bevat aparte pagina’s voor Over ons, missie en duurzaamheid, een vergelijking van diensten en de klachtenprocedure. De genoemde adresgegevens en contactgegevens zijn duidelijk gemarkeerde fictieve conceptgegevens voor het schoolproject.
+De website bevat aparte pagina’s voor Over ons, missie en duurzaamheid, uitleg over de vergelijkingskaart van de AFM en de klachtenprocedure. De genoemde adresgegevens en contactgegevens zijn duidelijk gemarkeerde fictieve conceptgegevens voor het schoolproject.
