@@ -34,3 +34,7 @@ Dit is een oriënterende annuïteitenberekening, geen acceptatie-engine van een 
 Voor AOW binnen tien jaar berekenen we alle combinaties van de opgegeven toekomstige pensioeninkomens. We kiezen de laagste leencapaciteit en rekenen voorzichtig met de oorspronkelijke hoofdsom en looptijd; toekomstige aflossing wordt niet meegenomen. Dit kan lager uitvallen dan een volledige toets bij de geldverstrekker. De aftrekkeuze geldt voor de volledige lening en looptijd. Gemengde leningdelen, een verstreken aftrektermijn en de bijleenregeling vereisen individueel advies.
 
 De getoonde indicatie is de inkomensgebonden leencapaciteit (LTI): toetsinkomen maal de toepasselijke financieringslastquote, verminderd met verplichtingen en omgerekend naar een annuïtaire lening. Zonder een specifieke woning worden de woningwaarde (LTV), energielabelruimte, aankoopkosten, eigen geld en overwaarde niet meegenomen. Geen verduurzamingsdepots, seniorenmaatwerk, overbrugging, bestaande leningdelen, NHG-toelatingsbeslissing of netto-maandlastberekening. Het aflossingsschema veronderstelt dezelfde rente over de volledige looptijd.
+
+## Informatiepagina’s
+
+De website bevat aparte pagina’s voor Over ons, missie en duurzaamheid, een vergelijking van diensten en de klachtenprocedure. De genoemde adresgegevens en contactgegevens zijn duidelijk gemarkeerde fictieve conceptgegevens voor het schoolproject.
