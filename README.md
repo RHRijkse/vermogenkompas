@@ -2,7 +2,7 @@
 
 Statische website. Open `index.html` via een lokale webserver; er is geen build of npm-installatie nodig. Publiceer alle HTML-, CSS- en JavaScriptbestanden uit de hoofdmap samen.
 
-De uitgebreide startpagina bevat de introductie, Woon & VermogenCheck, overwaarde, aanpak, diensten en het kennismakingsformulier. Alleen de hypotheekcalculator (`hypotheek.html`) en woonwensen (`woonwensen.html`) staan op aparte pagina's. Alle menulinks blijven bereikbaar. Het formulier bereidt alleen een download voor en verstuurt geen aanvraag.
+De startpagina begint met een compacte introductie, een directe uitnodiging voor kennismaken en drie gespreksingangen voor wonen en hypotheek, overwaarde en vermogen, en beleggen voor later. De onderwerpkaarten vullen het kennismakingsformulier vooraf in. Daarna volgen Woon & VermogenCheck, overwaarde, aanpak, diensten en het kennismakingsformulier. Alleen de hypotheekcalculator (`hypotheek.html`) en woonwensen (`woonwensen.html`) staan op aparte pagina's. Alle menulinks blijven bereikbaar. Het formulier bereidt alleen een download voor en verstuurt geen aanvraag.
 
 ## Hypotheekcalculator
 
