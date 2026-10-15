@@ -44,3 +44,9 @@ De website bevat aparte pagina’s voor Over ons, missie en duurzaamheid, uitleg
 `wettelijke-kaders.html` geeft een onderbouwd overzicht voor het Nederlandse schoolconcept, onderzocht op 15 oktober 2026. De pagina is op alle pagina’s bereikbaar via een rustige footerlink. De veertien uitklapbare onderwerpen onderscheiden vergunningen, hypotheekadvies, beleggingsadvies, Wwft, privacy, beloning, duurzaamheid en overige relevante eisen. Bronnen staan bij ieder onderwerp.
 
 De pagina bevestigt geen vergunningen of naleving. Echte bedrijfsgegevens, bevoegdheden en processen moeten voor ingebruikname worden vastgesteld. De uitlegpagina over de vergelijkingskaart vervangt geen eigen gestandaardiseerde kaart. Zie `docs/wettelijke-kaders-invoering.md` voor de nog benodigde besluiten en bewijsstukken.
+
+## Uitgewerkte vergelijkingskaarten
+
+Op `vergelijken.html` staan downloadbare kaarten voor Hypotheek en Vermogen opbouwen. Deze zijn op 15 oktober 2026 gemaakt met de publieke AFM-vergelijkingskaartapplicatie. De PDF’s in `downloads/` bevatten het standaardformat en een conceptvermelding op iedere pagina. Alle diensten, aanbiedersaantallen en prijzen zijn fictieve modelaannames. Er worden geen vergunningnummers of AFM-goedkeuring geclaimd.
+
+Het concept vergelijkt hypotheken van 12 aanbieders en beleggingsfondsen van 8 aanbieders en claimt daarom geen advies op onafhankelijke basis. Hypotheekadvies en bemiddeling voor een volgende koopwoning in loondienst: gemiddeld € 2.950. Alleen advies: € 1.950. Particulier vermogensadvies: € 1.350. De webpagina bevat ook alle overige tariefcategorieën, uitsluitingen en optionele onderhoudstarieven. De voorbeeldgemiddelden zijn geen historische klantgemiddelden.
