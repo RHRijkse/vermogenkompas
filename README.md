@@ -2,7 +2,7 @@
 
 Statische website. Open `index.html` via een lokale webserver; er is geen build of npm-installatie nodig. Publiceer alle HTML-, CSS- en JavaScriptbestanden uit de hoofdmap samen.
 
-De uitgebreide startpagina bevat de introductie, Woon & VermogenCheck, overwaarde, aanpak, diensten en het kennismakingsformulier. Alleen de hypotheekcalculator (`hypotheek.html`) en woonwensen (`woonwensen.html`) staan op aparte pagina's. Alle menulinks blijven bereikbaar. Het formulier bereidt alleen een download voor en verstuurt geen aanvraag.
+De startpagina begint met een compacte introductie, een directe uitnodiging voor kennismaken en drie gespreksingangen voor wonen en hypotheek, overwaarde en vermogen, en beleggen voor later. De onderwerpkaarten vullen het kennismakingsformulier vooraf in. Daarna volgen Woon & VermogenCheck, overwaarde, aanpak, diensten en het kennismakingsformulier. Alleen de hypotheekcalculator (`hypotheek.html`) en woonwensen (`woonwensen.html`) staan op aparte pagina's. Alle menulinks blijven bereikbaar. Het formulier bereidt alleen een download voor en verstuurt geen aanvraag.
 
 ## Hypotheekcalculator
 
@@ -38,3 +38,9 @@ De getoonde indicatie is de inkomensgebonden leencapaciteit (LTI): toetsinkomen 
 ## Informatiepagina’s
 
 De website bevat aparte pagina’s voor Over ons, missie en duurzaamheid, uitleg over de vergelijkingskaart van de AFM en de klachtenprocedure. De genoemde adresgegevens en contactgegevens zijn duidelijk gemarkeerde fictieve conceptgegevens voor het schoolproject.
+
+## Wettelijke kaders
+
+`wettelijke-kaders.html` geeft een onderbouwd overzicht voor het Nederlandse schoolconcept, onderzocht op 15 oktober 2026. De pagina is op alle pagina’s bereikbaar via een rustige footerlink. De veertien uitklapbare onderwerpen onderscheiden vergunningen, hypotheekadvies, beleggingsadvies, Wwft, privacy, beloning, duurzaamheid en overige relevante eisen. Bronnen staan bij ieder onderwerp.
+
+De pagina bevestigt geen vergunningen of naleving. Echte bedrijfsgegevens, bevoegdheden en processen moeten voor ingebruikname worden vastgesteld. De uitlegpagina over de vergelijkingskaart vervangt geen eigen gestandaardiseerde kaart. Zie `docs/wettelijke-kaders-invoering.md` voor de nog benodigde besluiten en bewijsstukken.
