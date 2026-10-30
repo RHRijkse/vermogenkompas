@@ -45,7 +45,11 @@
 .about-foundations{padding-bottom:42px}.foundation-list{display:grid;gap:16px}.foundation-card{display:grid;grid-template-columns:minmax(150px,.45fr) minmax(0,1.55fr);gap:42px;align-items:start;padding:36px 40px;border:1px solid var(--line);border-radius:16px;background:#fff}.foundation-card>*{min-width:0}.foundation-label{display:grid;gap:9px}.foundation-label span{font-size:2.25rem;line-height:1;color:var(--green);font-weight:650}.foundation-label small{font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:750}.foundation-card h2{font-size:1.8rem;margin-bottom:13px;overflow-wrap:anywhere}.foundation-card p{max-width:760px;font-size:.96rem}.foundation-card .foundation-claim{font-size:1.12rem;color:var(--navy);font-weight:750;line-height:1.45;margin-bottom:12px}.foundation-card-accent{background:var(--pale)}.advisor-section{padding-top:42px}
 .profile-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
 .profile-card{border:1px solid var(--line);border-radius:16px;background:#fff;padding:32px;display:flex;flex-direction:column;align-items:flex-start}
-.profile-initials{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:var(--pale);color:var(--green);font-weight:800;margin-bottom:20px}
+.profile-portrait{width:100%;max-width:320px;aspect-ratio:4/5;flex-shrink:0;overflow:hidden;border-radius:10px;background:var(--pale);margin-bottom:24px}
+.profile-portrait img{display:block;width:100%;height:100%;object-fit:cover;object-position:var(--portrait-position,50% 50%);transform:scale(var(--portrait-scale,1));transform-origin:var(--portrait-origin,50% 50%)}
+.profile-portrait-ruben-rijkse{--portrait-position:50% 0%}
+.profile-portrait-max-brandt{--portrait-position:50% 20%;--portrait-scale:1.6;--portrait-origin:50% 33%}
+.profile-portrait-joppe-maas{--portrait-position:50% 30%;--portrait-scale:1.5;--portrait-origin:58% 33%}
 .profile-focus{font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--green);font-weight:750}
 .profile-card h2{font-size:1.75rem;margin:9px 0 16px}.profile-card p{font-size:.94rem;margin:0 0 15px}.profile-card strong{margin-top:auto;padding-top:8px;color:var(--navy)}
 .principle-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-bottom:70px}
