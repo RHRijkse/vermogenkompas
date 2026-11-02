@@ -18,6 +18,20 @@ node --test --test-isolation=none mortgage-engine.test.cjs
 
 De tests controleren de annuïteit, nulrente, AOW-tabellen, grenswaarden, alleenstaandenruimte, energielabels, DUO-brutering, inkomen na alimentatie, woningwaarde, eigen geld en toekomstige pensioenscenario's. Een onafhankelijk voorbeeld uit de ABN AMRO-calculator op 12 september 2026 is opgenomen: samen €40.000 + €0 inkomen, energielabel A, 4,33%, 30 jaar, 10 jaar rentevast, volledig aftrekbaar geeft €168.399 en €836,33 bruto per maand. Eén overeenkomst is geen certificering van alle bankscenario's.
 
+### Aansluiting op het Excelmodel 2026
+
+Het rekenalgoritme is vergeleken met `Schoolopdracht_LTI_2026.xlsx`, tabblad Rekentool. Alle 97 inkomensrijen en 12 rentekolommen van de reguliere tabel komen overeen. De rentekolom wordt gekozen na afronding op drie decimalen in procenten. De annuïteit blijft rekenen met de ongeronde toetsrente. Alleen de uiteindelijke leenbedragen worden naar beneden afgerond op hele euro's.
+
+Vrijstellingen voor alleenstaanden, energielabel en maatregelen worden eerst gedeeld door de annuïteitenfactor bij dertig jaar. Deze extra maandruimte wordt samen met de resterende maandruimte gekapitaliseerd tegen de gekozen looptijd. Een kortere looptijd geeft daardoor minder extra lening. Negatieve maandruimte blijft behouden tot alle vrijstellingen zijn verwerkt. Daarna wordt het leenbedrag op minimaal nul begrensd.
+
+De engine accepteert aanvullend `creditLimit` en `energyMeasures`, beide standaard nul. Een kredietlimiet veroorzaakt 2% maandelijkse toetslast. `monthlyDebt` bevat uitsluitend andere al getoetste maandlasten als daarnaast `creditLimit` wordt meegegeven. Het maatregelenbudget wordt begrensd op het maximum van het bestaande energielabel. `withoutMeasures` geeft de LTI-ruimte zonder maatregelen en `extraForMeasures` het verschil met de totale LTI-ruimte.
+
+Het bestaande formulier, alle teksten en de vormgeving zijn ongewijzigd. Jaarinkomen wordt inclusief vakantiegeld en vaste extra's ingevuld. De kredietinvoer blijft een maandelijkse toetslast. Het formulier geeft geen label of maatregelenbudget door en rekent daarmee zonder energievrijstellingen.
+
+De aangeleverde werkboekformules zijn lokaal opnieuw berekend in artifact-tool en met de engine vergeleken. Het oorspronkelijke Excelbestand is niet aangepast en financiële casusgegevens worden niet in deze repository opgenomen. De openbare regressietests in `test/fixtures/lti-2026-synthetic.json` gebruiken uitsluitend verzonnen invoer en onafhankelijk met Python Decimal berekende uitkomsten. Zij controleren alle labels, kortere looptijden, rentegrenzen en negatieve maandruimte. De bestaande AOW-, DUO-, nulrente- en woningberekeningen blijven aanvullingen op het beperktere bereik van het Excelmodel.
+
+De synthetische referentie-uitkomsten zijn reproduceerbaar met `python3 scripts/generate-lti-fixtures.py`. Dit script leest uitsluitend de al openbare normtabel en gebruikt geen werkboekgegevens of extra Pythonpakketten.
+
 ### Bronnen en onderhoud
 
 - [TRHK 2026, artikelen 2–5 en bijlage 1](https://wetten.overheid.nl/BWBR0032503/2026-01-01): vier volledige financieringslasttabellen. Gedownload op 12 september 2026; getallen automatisch uit HTML-tabellen geëxtraheerd.
