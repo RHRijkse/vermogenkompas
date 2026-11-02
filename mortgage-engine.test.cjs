@@ -27,3 +27,36 @@ test('Upcoming pensions test every transition and use lowest capacity',()=>{cons
 test('Schedule pays off principal and cashflow agrees with total interest',()=>{for(const rate of [0,0.001,4,20]){const s=e.schedule(300000,rate,360);assert.equal(s.years.at(-1).balance,0);near(s.totalPaid,s.payment*360);near(s.firstInterest+s.firstRepayment,s.payment);assert.ok(s.years.every((y,i,all)=>i===0||y.balance<=all[i-1].balance));}});
 test('Invalid inputs cannot yield misleading financial results',()=>{for(const rate of [NaN,Infinity,-1,21,'4'])assert.throws(()=>calc({rate}));assert.throws(()=>calc({years:0}));assert.throws(()=>calc({years:3.2}));assert.throws(()=>calc({label:'invalid'}));assert.throws(()=>calc({people:[{income:40000,status:'soon'}]}));assert.throws(()=>calc({ownMoney:-1}));});
 
+const reference=require('./test/fixtures/lti-2026-synthetic.json');
+for(const scenario of reference.cases)test('Synthetic LTI 2026: '+scenario.name,()=>{
+  const r=e.calculate(scenario.input);
+  const values={...r,...r.limiting,withoutMeasures:r.withoutMeasures,payment:r.monthly};
+  for(const [key,expected] of Object.entries(scenario.expected)){
+    if(['incomeMaximum','extraForMeasures','withoutMeasures'].includes(key))assert.equal(values[key],expected,key);
+    else near(values[key],expected,1e-7);
+  }
+});
+test('Rate column selection rounds to three decimals in annual percentage',()=>{
+  for(const boundary of [1.5,2,2.5,3,3.5,4,4.5,5,5.5,6,6.5]){
+    assert.equal(e.quote(110000,boundary+0.0004,false,true).percent,e.quote(110000,boundary,false,true).percent);
+    assert.equal(e.quote(110000,boundary+0.0005,false,true).percent,e.quote(110000,boundary+0.001,false,true).percent);
+    assert.equal(e.quote(110000,boundary+0.0006,false,true).percent,e.quote(110000,boundary+0.001,false,true).percent);
+  }
+});
+test('Credit limits are assessed at 2% monthly, separate from other assessed charges',()=>{
+  const r=calc({creditLimit:7500,monthlyDebt:75});
+  assert.equal(r.creditCharge,150);assert.equal(r.debt,225);
+  assert.equal(r.maximum,calc({monthlyDebt:225}).maximum);
+});
+test('Optional Excel amounts default to zero and reject invalid numbers',()=>{
+  assert.equal(calc({}).maximum,calc({creditLimit:0,energyMeasures:0}).maximum);
+  for(const field of ['creditLimit','energyMeasures'])for(const value of [-1,NaN,Infinity,'100',null])assert.throws(()=>calc({[field]:value}));
+  assert.equal(calc({label:'unknown',energyMeasures:50000}).measuresAllowance,0);
+});
+test('Thirty-year exemption conversion is stable at zero interest',()=>{
+  const r=calc({people:[{income:40000,status:'later'}],singleAllowance:true,rate:0,years:20,fixedYears:20,label:'B',energyMeasures:10000});
+  near(r.annuityFactor,240);near(r.thirtyYearFactor,360);
+  near(r.limiting.maximum,(40000*17.4/1200+37000/360)*240);
+  assert.equal(r.maximum,Math.floor(r.limiting.maximum));
+});
+

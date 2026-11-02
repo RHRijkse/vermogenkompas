@@ -1,0 +1,2098 @@
+{
+  "source": "Invented test inputs only. No workbook case data.",
+  "method": "Independent Python Decimal reference at 45 digit precision, using the already public TRHK table.",
+  "cases": [
+    {
+      "name": "Baseline",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 30,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 7000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "C"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 5.0,
+        "percent": 28.5,
+        "monthly": 2417.5,
+        "annuityFactor": 186.28161704607552,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 450335.8092088876,
+        "single": 0,
+        "energy": 5000,
+        "measuresAllowance": 7000,
+        "incomeMaximum": 462335,
+        "extraForMeasures": 7000,
+        "withoutMeasures": 455335,
+        "payment": 2260.897550088431
+      }
+    },
+    {
+      "name": "Form inputs without energy",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 30,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 0,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "unknown"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 5.0,
+        "percent": 28.5,
+        "monthly": 2417.5,
+        "annuityFactor": 186.28161704607552,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 450335.8092088876,
+        "single": 0,
+        "energy": 0,
+        "measuresAllowance": 0,
+        "incomeMaximum": 450335,
+        "extraForMeasures": 0,
+        "withoutMeasures": 450335,
+        "payment": 2202.2154892428084
+      }
+    },
+    {
+      "name": "Twenty year term",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 20,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 7000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "C"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 5.0,
+        "percent": 28.5,
+        "monthly": 2417.5,
+        "annuityFactor": 151.52531307432258,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 366312.44435717486,
+        "single": 0,
+        "energy": 5000,
+        "measuresAllowance": 7000,
+        "incomeMaximum": 376073,
+        "extraForMeasures": 5694,
+        "withoutMeasures": 370379,
+        "payment": 2318.7560618083717
+      }
+    },
+    {
+      "name": "No measures",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 30,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 0,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "C"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 5.0,
+        "percent": 28.5,
+        "monthly": 2417.5,
+        "annuityFactor": 186.28161704607552,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 450335.8092088876,
+        "single": 0,
+        "energy": 5000,
+        "measuresAllowance": 0,
+        "incomeMaximum": 455335,
+        "extraForMeasures": 0,
+        "withoutMeasures": 455335,
+        "payment": 2226.6663479284844
+      }
+    },
+    {
+      "name": "Partial measures budget",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 30,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 1750,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "C"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 5.0,
+        "percent": 28.5,
+        "monthly": 2417.5,
+        "annuityFactor": 186.28161704607552,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 450335.8092088876,
+        "single": 0,
+        "energy": 5000,
+        "measuresAllowance": 1750,
+        "incomeMaximum": 457085,
+        "extraForMeasures": 1750,
+        "withoutMeasures": 455335,
+        "payment": 2235.2241484684714
+      }
+    },
+    {
+      "name": "Measures capped",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 30,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 40000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "C"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 5.0,
+        "percent": 28.5,
+        "monthly": 2417.5,
+        "annuityFactor": 186.28161704607552,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 450335.8092088876,
+        "single": 0,
+        "energy": 5000,
+        "measuresAllowance": 15000,
+        "incomeMaximum": 470335,
+        "extraForMeasures": 15000,
+        "withoutMeasures": 455335,
+        "payment": 2300.0189239855135
+      }
+    },
+    {
+      "name": "Negative monthly room before exemptions",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 30,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 2400,
+        "creditLimit": 7500,
+        "energyMeasures": 7000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "C"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 5.0,
+        "percent": 28.5,
+        "monthly": 62.5,
+        "annuityFactor": 186.28161704607552,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 11642.60106537972,
+        "single": 0,
+        "energy": 5000,
+        "measuresAllowance": 7000,
+        "incomeMaximum": 23642,
+        "extraForMeasures": 7000,
+        "withoutMeasures": 16642,
+        "payment": 115.61344020935186
+      }
+    },
+    {
+      "name": "No room after exemptions",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 30,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 90000,
+        "creditLimit": 7500,
+        "energyMeasures": 7000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "C"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 5.0,
+        "percent": 28.5,
+        "monthly": -87537.5,
+        "annuityFactor": 186.28161704607552,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 0.0,
+        "single": 0,
+        "energy": 5000,
+        "measuresAllowance": 7000,
+        "incomeMaximum": 0,
+        "extraForMeasures": 0,
+        "withoutMeasures": 0,
+        "payment": 0.0
+      }
+    },
+    {
+      "name": "Single at threshold",
+      "input": {
+        "people": [
+          {
+            "income": 30000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 30,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 7000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "C"
+      },
+      "expected": {
+        "income": 30000.0,
+        "incomeBand": 30000,
+        "testRate": 5.0,
+        "percent": 21.6,
+        "monthly": 345.0,
+        "annuityFactor": 186.28161704607552,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 64267.157880896055,
+        "single": 0,
+        "energy": 5000,
+        "measuresAllowance": 7000,
+        "incomeMaximum": 76267,
+        "extraForMeasures": 7000,
+        "withoutMeasures": 69267,
+        "payment": 372.958727876095
+      }
+    },
+    {
+      "name": "Single above threshold",
+      "input": {
+        "people": [
+          {
+            "income": 30007,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 30,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 7000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "C"
+      },
+      "expected": {
+        "income": 30007.0,
+        "incomeBand": 30000,
+        "testRate": 5.0,
+        "percent": 21.6,
+        "monthly": 345.126,
+        "annuityFactor": 186.28161704607552,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 81290.62936464386,
+        "single": 17000,
+        "energy": 5000,
+        "measuresAllowance": 7000,
+        "incomeMaximum": 93290,
+        "extraForMeasures": 7000,
+        "withoutMeasures": 86290,
+        "payment": 456.2041213573486
+      }
+    },
+    {
+      "name": "Single twenty years",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 20,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 7000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "C"
+      },
+      "expected": {
+        "income": 65000.0,
+        "incomeBand": 65000,
+        "testRate": 5.0,
+        "percent": 24.7,
+        "monthly": 1142.9166666666667,
+        "annuityFactor": 151.52531307432258,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 187008.95669816452,
+        "single": 17000,
+        "energy": 5000,
+        "measuresAllowance": 7000,
+        "incomeMaximum": 196770,
+        "extraForMeasures": 5694,
+        "withoutMeasures": 191076,
+        "payment": 1213.2262360819132
+      }
+    },
+    {
+      "name": "Offer above AFM",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 6.2,
+        "years": 30,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 7000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "C"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 6.2,
+        "percent": 30.8,
+        "monthly": 2628.3333333333335,
+        "annuityFactor": 163.2735757821026,
+        "thirtyYearFactor": 163.2735757821026,
+        "baseMaximum": 429137.38168062636,
+        "single": 0,
+        "energy": 5000,
+        "measuresAllowance": 7000,
+        "incomeMaximum": 441137,
+        "extraForMeasures": 7000,
+        "withoutMeasures": 434137,
+        "payment": 2701.82727294906
+      }
+    },
+    {
+      "name": "Short loan fully fixed",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 3.2,
+        "years": 5,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 7000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "C"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 3.2,
+        "percent": 25.8,
+        "monthly": 2170.0,
+        "annuityFactor": 55.37802134010396,
+        "thirtyYearFactor": 231.2315879996339,
+        "baseMaximum": 120170.3063080256,
+        "single": 0,
+        "energy": 5000,
+        "measuresAllowance": 7000,
+        "incomeMaximum": 123044,
+        "extraForMeasures": 1677,
+        "withoutMeasures": 121367,
+        "payment": 2221.8923143592583
+      }
+    },
+    {
+      "name": "No credit",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 30,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 0,
+        "energyMeasures": 7000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "C"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 5.0,
+        "percent": 28.5,
+        "monthly": 2567.5,
+        "annuityFactor": 186.28161704607552,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 478278.05176579894,
+        "single": 0,
+        "energy": 5000,
+        "measuresAllowance": 7000,
+        "incomeMaximum": 490278,
+        "extraForMeasures": 7000,
+        "withoutMeasures": 483278,
+        "payment": 2397.543618939202
+      }
+    },
+    {
+      "name": "Additional monthly debt",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 30,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 175,
+        "creditLimit": 7500,
+        "energyMeasures": 7000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "C"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 5.0,
+        "percent": 28.5,
+        "monthly": 2287.5,
+        "annuityFactor": 186.28161704607552,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 426119.19899289776,
+        "single": 0,
+        "energy": 5000,
+        "measuresAllowance": 7000,
+        "incomeMaximum": 438119,
+        "extraForMeasures": 7000,
+        "withoutMeasures": 431119,
+        "payment": 2142.4771513019637
+      }
+    },
+    {
+      "name": "Income above final band",
+      "input": {
+        "people": [
+          {
+            "income": 180000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 30,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 7000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "C"
+      },
+      "expected": {
+        "income": 180000.0,
+        "incomeBand": 125000,
+        "testRate": 5.0,
+        "percent": 29.2,
+        "monthly": 4185.0,
+        "annuityFactor": 186.28161704607552,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 796588.5673378261,
+        "single": 17000,
+        "energy": 5000,
+        "measuresAllowance": 7000,
+        "incomeMaximum": 808588,
+        "extraForMeasures": 7000,
+        "withoutMeasures": 801588,
+        "payment": 3954.1341845867273
+      }
+    },
+    {
+      "name": "Below rounded boundary",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.0004,
+        "years": 30,
+        "fixedYears": 10,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 7000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "C"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 4.0004,
+        "percent": 26.7,
+        "monthly": 2252.5,
+        "annuityFactor": 209.4511232484991,
+        "thirtyYearFactor": 209.4511232484991,
+        "baseMaximum": 471788.6551172442,
+        "single": 0,
+        "energy": 5000,
+        "measuresAllowance": 7000,
+        "incomeMaximum": 483788,
+        "extraForMeasures": 7000,
+        "withoutMeasures": 476788,
+        "payment": 2309.7894749698685
+      }
+    },
+    {
+      "name": "Exact rounding midpoint",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.0005,
+        "years": 30,
+        "fixedYears": 10,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 7000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "C"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 4.0005,
+        "percent": 27.7,
+        "monthly": 2344.1666666666665,
+        "annuityFactor": 209.44859406031958,
+        "thirtyYearFactor": 209.44859406031958,
+        "baseMaximum": 490982.4125763991,
+        "single": 0,
+        "energy": 5000,
+        "measuresAllowance": 7000,
+        "incomeMaximum": 502982,
+        "extraForMeasures": 7000,
+        "withoutMeasures": 495982,
+        "payment": 2401.4579914303226
+      }
+    },
+    {
+      "name": "Above rounded boundary",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.0006,
+        "years": 30,
+        "fixedYears": 10,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 7000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "C"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 4.0006,
+        "percent": 27.7,
+        "monthly": 2344.1666666666665,
+        "annuityFactor": 209.44606491743565,
+        "thirtyYearFactor": 209.44606491743565,
+        "baseMaximum": 490976.4838439554,
+        "single": 0,
+        "energy": 5000,
+        "measuresAllowance": 7000,
+        "incomeMaximum": 502976,
+        "extraForMeasures": 7000,
+        "withoutMeasures": 495976,
+        "payment": 2401.4583429785366
+      }
+    },
+    {
+      "name": "Low positive income",
+      "input": {
+        "people": [
+          {
+            "income": 12000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 30,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 0,
+        "creditLimit": 0,
+        "energyMeasures": 7000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "C"
+      },
+      "expected": {
+        "income": 12000.0,
+        "incomeBand": 0,
+        "testRate": 5.0,
+        "percent": 21.6,
+        "monthly": 216.0,
+        "annuityFactor": 186.28161704607552,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 40236.82928195231,
+        "single": 0,
+        "energy": 5000,
+        "measuresAllowance": 7000,
+        "incomeMaximum": 52236,
+        "extraForMeasures": 7000,
+        "withoutMeasures": 45236,
+        "payment": 255.44301086099753
+      }
+    },
+    {
+      "name": "Label G, 20 years",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 20,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 40000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "G"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 5.0,
+        "percent": 28.5,
+        "monthly": 2417.5,
+        "annuityFactor": 151.52531307432258,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 366312.44435717486,
+        "single": 0,
+        "energy": 0,
+        "measuresAllowance": 20000,
+        "incomeMaximum": 382580,
+        "extraForMeasures": 16268,
+        "withoutMeasures": 366312,
+        "payment": 2358.876319562018
+      }
+    },
+    {
+      "name": "Label G, 30 years",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 30,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 40000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "G"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 5.0,
+        "percent": 28.5,
+        "monthly": 2417.5,
+        "annuityFactor": 186.28161704607552,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 450335.8092088876,
+        "single": 0,
+        "energy": 0,
+        "measuresAllowance": 20000,
+        "incomeMaximum": 470335,
+        "extraForMeasures": 20000,
+        "withoutMeasures": 450335,
+        "payment": 2300.0189239855135
+      }
+    },
+    {
+      "name": "Label F, 20 years",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 20,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 40000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "F"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 5.0,
+        "percent": 28.5,
+        "monthly": 2417.5,
+        "annuityFactor": 151.52531307432258,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 366312.44435717486,
+        "single": 0,
+        "energy": 0,
+        "measuresAllowance": 20000,
+        "incomeMaximum": 382580,
+        "extraForMeasures": 16268,
+        "withoutMeasures": 366312,
+        "payment": 2358.876319562018
+      }
+    },
+    {
+      "name": "Label F, 30 years",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 30,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 40000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "F"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 5.0,
+        "percent": 28.5,
+        "monthly": 2417.5,
+        "annuityFactor": 186.28161704607552,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 450335.8092088876,
+        "single": 0,
+        "energy": 0,
+        "measuresAllowance": 20000,
+        "incomeMaximum": 470335,
+        "extraForMeasures": 20000,
+        "withoutMeasures": 450335,
+        "payment": 2300.0189239855135
+      }
+    },
+    {
+      "name": "Label E, 20 years",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 20,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 40000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "E"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 5.0,
+        "percent": 28.5,
+        "monthly": 2417.5,
+        "annuityFactor": 151.52531307432258,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 366312.44435717486,
+        "single": 0,
+        "energy": 0,
+        "measuresAllowance": 20000,
+        "incomeMaximum": 382580,
+        "extraForMeasures": 16268,
+        "withoutMeasures": 366312,
+        "payment": 2358.876319562018
+      }
+    },
+    {
+      "name": "Label E, 30 years",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 30,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 40000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "E"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 5.0,
+        "percent": 28.5,
+        "monthly": 2417.5,
+        "annuityFactor": 186.28161704607552,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 450335.8092088876,
+        "single": 0,
+        "energy": 0,
+        "measuresAllowance": 20000,
+        "incomeMaximum": 470335,
+        "extraForMeasures": 20000,
+        "withoutMeasures": 450335,
+        "payment": 2300.0189239855135
+      }
+    },
+    {
+      "name": "Label D, 20 years",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 20,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 40000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "D"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 5.0,
+        "percent": 28.5,
+        "monthly": 2417.5,
+        "annuityFactor": 151.52531307432258,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 366312.44435717486,
+        "single": 0,
+        "energy": 5000,
+        "measuresAllowance": 15000,
+        "incomeMaximum": 382580,
+        "extraForMeasures": 12201,
+        "withoutMeasures": 370379,
+        "payment": 2358.876319562018
+      }
+    },
+    {
+      "name": "Label D, 30 years",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 30,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 40000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "D"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 5.0,
+        "percent": 28.5,
+        "monthly": 2417.5,
+        "annuityFactor": 186.28161704607552,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 450335.8092088876,
+        "single": 0,
+        "energy": 5000,
+        "measuresAllowance": 15000,
+        "incomeMaximum": 470335,
+        "extraForMeasures": 15000,
+        "withoutMeasures": 455335,
+        "payment": 2300.0189239855135
+      }
+    },
+    {
+      "name": "Label C, 20 years",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 20,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 40000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "C"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 5.0,
+        "percent": 28.5,
+        "monthly": 2417.5,
+        "annuityFactor": 151.52531307432258,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 366312.44435717486,
+        "single": 0,
+        "energy": 5000,
+        "measuresAllowance": 15000,
+        "incomeMaximum": 382580,
+        "extraForMeasures": 12201,
+        "withoutMeasures": 370379,
+        "payment": 2358.876319562018
+      }
+    },
+    {
+      "name": "Label C, 30 years",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 30,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 40000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "C"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 5.0,
+        "percent": 28.5,
+        "monthly": 2417.5,
+        "annuityFactor": 186.28161704607552,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 450335.8092088876,
+        "single": 0,
+        "energy": 5000,
+        "measuresAllowance": 15000,
+        "incomeMaximum": 470335,
+        "extraForMeasures": 15000,
+        "withoutMeasures": 455335,
+        "payment": 2300.0189239855135
+      }
+    },
+    {
+      "name": "Label B, 20 years",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 20,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 40000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "B"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 5.0,
+        "percent": 28.5,
+        "monthly": 2417.5,
+        "annuityFactor": 151.52531307432258,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 366312.44435717486,
+        "single": 0,
+        "energy": 10000,
+        "measuresAllowance": 10000,
+        "incomeMaximum": 382580,
+        "extraForMeasures": 8134,
+        "withoutMeasures": 374446,
+        "payment": 2358.876319562018
+      }
+    },
+    {
+      "name": "Label B, 30 years",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 30,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 40000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "B"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 5.0,
+        "percent": 28.5,
+        "monthly": 2417.5,
+        "annuityFactor": 186.28161704607552,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 450335.8092088876,
+        "single": 0,
+        "energy": 10000,
+        "measuresAllowance": 10000,
+        "incomeMaximum": 470335,
+        "extraForMeasures": 10000,
+        "withoutMeasures": 460335,
+        "payment": 2300.0189239855135
+      }
+    },
+    {
+      "name": "Label A, 20 years",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 20,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 40000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "A"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 5.0,
+        "percent": 28.5,
+        "monthly": 2417.5,
+        "annuityFactor": 151.52531307432258,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 366312.44435717486,
+        "single": 0,
+        "energy": 10000,
+        "measuresAllowance": 10000,
+        "incomeMaximum": 382580,
+        "extraForMeasures": 8134,
+        "withoutMeasures": 374446,
+        "payment": 2358.876319562018
+      }
+    },
+    {
+      "name": "Label A, 30 years",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 30,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 40000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "A"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 5.0,
+        "percent": 28.5,
+        "monthly": 2417.5,
+        "annuityFactor": 186.28161704607552,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 450335.8092088876,
+        "single": 0,
+        "energy": 10000,
+        "measuresAllowance": 10000,
+        "incomeMaximum": 470335,
+        "extraForMeasures": 10000,
+        "withoutMeasures": 460335,
+        "payment": 2300.0189239855135
+      }
+    },
+    {
+      "name": "Label A+, 20 years",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 20,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 40000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "A+"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 5.0,
+        "percent": 28.5,
+        "monthly": 2417.5,
+        "annuityFactor": 151.52531307432258,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 366312.44435717486,
+        "single": 0,
+        "energy": 20000,
+        "measuresAllowance": 10000,
+        "incomeMaximum": 390715,
+        "extraForMeasures": 8135,
+        "withoutMeasures": 382580,
+        "payment": 2409.034348888269
+      }
+    },
+    {
+      "name": "Label A+, 30 years",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 30,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 40000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "A+"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 5.0,
+        "percent": 28.5,
+        "monthly": 2417.5,
+        "annuityFactor": 186.28161704607552,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 450335.8092088876,
+        "single": 0,
+        "energy": 20000,
+        "measuresAllowance": 10000,
+        "incomeMaximum": 480335,
+        "extraForMeasures": 10000,
+        "withoutMeasures": 470335,
+        "payment": 2348.920641356866
+      }
+    },
+    {
+      "name": "Label A++, 20 years",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 20,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 40000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "A++"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 5.0,
+        "percent": 28.5,
+        "monthly": 2417.5,
+        "annuityFactor": 151.52531307432258,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 366312.44435717486,
+        "single": 0,
+        "energy": 20000,
+        "measuresAllowance": 10000,
+        "incomeMaximum": 390715,
+        "extraForMeasures": 8135,
+        "withoutMeasures": 382580,
+        "payment": 2409.034348888269
+      }
+    },
+    {
+      "name": "Label A++, 30 years",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 30,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 40000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "A++"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 5.0,
+        "percent": 28.5,
+        "monthly": 2417.5,
+        "annuityFactor": 186.28161704607552,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 450335.8092088876,
+        "single": 0,
+        "energy": 20000,
+        "measuresAllowance": 10000,
+        "incomeMaximum": 480335,
+        "extraForMeasures": 10000,
+        "withoutMeasures": 470335,
+        "payment": 2348.920641356866
+      }
+    },
+    {
+      "name": "Label A+++, 20 years",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 20,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 40000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "A+++"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 5.0,
+        "percent": 28.5,
+        "monthly": 2417.5,
+        "annuityFactor": 151.52531307432258,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 366312.44435717486,
+        "single": 0,
+        "energy": 25000,
+        "measuresAllowance": 0,
+        "incomeMaximum": 386647,
+        "extraForMeasures": 0,
+        "withoutMeasures": 386647,
+        "payment": 2383.9522513714664
+      }
+    },
+    {
+      "name": "Label A+++, 30 years",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 30,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 40000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "A+++"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 5.0,
+        "percent": 28.5,
+        "monthly": 2417.5,
+        "annuityFactor": 186.28161704607552,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 450335.8092088876,
+        "single": 0,
+        "energy": 25000,
+        "measuresAllowance": 0,
+        "incomeMaximum": 475335,
+        "extraForMeasures": 0,
+        "withoutMeasures": 475335,
+        "payment": 2324.46978267119
+      }
+    },
+    {
+      "name": "Label A++++, 20 years",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 20,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 40000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "A++++"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 5.0,
+        "percent": 28.5,
+        "monthly": 2417.5,
+        "annuityFactor": 151.52531307432258,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 366312.44435717486,
+        "single": 0,
+        "energy": 30000,
+        "measuresAllowance": 0,
+        "incomeMaximum": 390715,
+        "extraForMeasures": 0,
+        "withoutMeasures": 390715,
+        "payment": 2409.034348888269
+      }
+    },
+    {
+      "name": "Label A++++, 30 years",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 30,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 40000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "A++++"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 5.0,
+        "percent": 28.5,
+        "monthly": 2417.5,
+        "annuityFactor": 186.28161704607552,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 450335.8092088876,
+        "single": 0,
+        "energy": 30000,
+        "measuresAllowance": 0,
+        "incomeMaximum": 480335,
+        "extraForMeasures": 0,
+        "withoutMeasures": 480335,
+        "payment": 2348.920641356866
+      }
+    },
+    {
+      "name": "Label A++++garantie, 20 years",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 20,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 40000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "A++++garantie"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 5.0,
+        "percent": 28.5,
+        "monthly": 2417.5,
+        "annuityFactor": 151.52531307432258,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 366312.44435717486,
+        "single": 0,
+        "energy": 40000,
+        "measuresAllowance": 0,
+        "incomeMaximum": 398849,
+        "extraForMeasures": 0,
+        "withoutMeasures": 398849,
+        "payment": 2459.1862125071657
+      }
+    },
+    {
+      "name": "Label A++++garantie, 30 years",
+      "input": {
+        "people": [
+          {
+            "income": 65000,
+            "status": "later"
+          },
+          {
+            "income": 45000,
+            "status": "later"
+          }
+        ],
+        "singleAllowance": true,
+        "rate": 4.2,
+        "years": 30,
+        "fixedYears": 5,
+        "deductible": true,
+        "monthlyDebt": 45,
+        "creditLimit": 7500,
+        "energyMeasures": 40000,
+        "duo": 0,
+        "alimony": 0,
+        "ownMoney": 0,
+        "equity": 0,
+        "propertyValue": 0,
+        "purchasePrice": 0,
+        "costs": 0,
+        "label": "A++++garantie"
+      },
+      "expected": {
+        "income": 110000.0,
+        "incomeBand": 110000,
+        "testRate": 5.0,
+        "percent": 28.5,
+        "monthly": 2417.5,
+        "annuityFactor": 186.28161704607552,
+        "thirtyYearFactor": 186.28161704607552,
+        "baseMaximum": 450335.8092088876,
+        "single": 0,
+        "energy": 40000,
+        "measuresAllowance": 0,
+        "incomeMaximum": 490335,
+        "extraForMeasures": 0,
+        "withoutMeasures": 490335,
+        "payment": 2397.8223587282187
+      }
+    }
+  ]
+}

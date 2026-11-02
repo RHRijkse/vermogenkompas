@@ -3,6 +3,7 @@
   'use strict';
   const norms = typeof module !== 'undefined' && module.exports ? require('./mortgage-norms.js') : root.MortgageNorms;
   const energy = {unknown:0,G:0,F:0,E:0,D:5000,C:5000,B:10000,A:10000,'A+':20000,'A++':20000,'A+++':25000,'A++++':30000,'A++++garantie':40000};
+  const measures = {unknown:0,G:20000,F:20000,E:20000,D:15000,C:15000,B:10000,A:10000,'A+':10000,'A++':10000,'A+++':0,'A++++':0,'A++++garantie':0};
   function number(n,name,max=10000000) {if(typeof n!=='number'||!Number.isFinite(n)||n<0||n>max)throw Error('Controleer '+name+'.');return n;}
   function payment(principal,rate,months) {
     number(principal,'het hypotheekbedrag',100000000);number(rate,'de rente',20);
@@ -14,7 +15,10 @@
     const table=norms.tables[(deductible?0:2)+(aow?1:0)];
     let row=table[0];
     for(const candidate of table){if(candidate[0]>income)break;row=candidate;}
-    let column=norms.rateUpperBounds.findIndex(limit=>rate<=limit);
+    // Rekentool G13 rounds the annual percentage to three decimals for table selection only.
+    const scaledRate=rate*1000;
+    const tableRate=Math.round(scaledRate+Number.EPSILON*Math.max(1,scaledRate))/1000;
+    let column=norms.rateUpperBounds.findIndex(limit=>tableRate<=limit);
     if(column===-1)column=11;
     return {percent:row[column+1],incomeBand:row[0],table:(deductible?1:3)+(aow?1:0)};
   }
@@ -32,10 +36,16 @@
     if(![1,5,10,15,20,30].includes(x.fixedYears))throw Error('Kies een geldige rentevaste periode.');
     if(typeof x.deductible!=='boolean'||typeof x.singleAllowance!=='boolean')throw Error('Controleer de renteaftrek en huishoudsituatie.');
     if(!Object.hasOwn(energy,x.label))throw Error('Kies een geldig energielabel.');
+    // Optional amounts are separate from the already assessed monthlyDebt supplied by the form.
+    const {creditLimit=0,energyMeasures=0}=x;
+    number(creditLimit,'de kredietlimiet');number(energyMeasures,'het maatregelenbudget');
     const months=x.years*12;
     const testRate=x.fixedYears>=10||x.fixedYears>=x.years?x.rate:Math.max(5,x.rate);
-    const factor=payment(1,testRate,months);
-    const debt=x.monthlyDebt+x.duo*duoFactor(testRate,x.deductible);
+    const annuityFactor=1/payment(1,testRate,months);
+    const thirtyYearFactor=1/payment(1,testRate,360);
+    const creditCharge=creditLimit*0.02;
+    const debt=x.monthlyDebt+creditCharge+x.duo*duoFactor(testRate,x.deductible);
+    const measuresAllowance=Math.min(energyMeasures,measures[x.label]);
     // Test current income and every transition to AOW conservatively at the original principal.
     const scenarios=[];
     const transitions=x.people.map((p,i)=>p.status==='soon'?i:-1).filter(i=>i>=0);
@@ -51,10 +61,14 @@
       const q=candidates.reduce((a,b)=>a.percent<=b.percent?a:b);
       const aow=people.length===1&&people[0].aow;
       const single=x.people.length===1&&x.singleAllowance&&income>(aow?29000:30000)?17000:0;
-      const allowance=single+energy[x.label];
       const monthly=income*q.percent/1200-debt;
-      const maximum=income>0?Math.max(0,monthly/factor+allowance):0;
-      scenarios.push({...q,income,maximum,single,monthly,mask});
+      // Rekentool G26:G34: convert exemptions to a 30-year monthly amount first.
+      // Preserve negative monthly room until all exemptions have been included.
+      const principal=allowance=>income>0?Math.max(0,(monthly+allowance/thirtyYearFactor)*annuityFactor):0;
+      const baseMaximum=principal(single);
+      const withoutMeasures=principal(single+energy[x.label]);
+      const maximum=principal(single+energy[x.label]+measuresAllowance);
+      scenarios.push({...q,income,maximum,baseMaximum,withoutMeasures,single,monthly,mask});
     }
     const limiting=scenarios.reduce((a,b)=>a.maximum<=b.maximum?a:b);
     const incomeMaximum=Math.floor(limiting.maximum);
@@ -62,7 +76,8 @@
     const funds=x.ownMoney+x.equity;
     const needed=Math.max(0,x.purchasePrice+x.costs-funds);
     const gap=x.purchasePrice>0?Math.max(0,needed-maximum):Math.max(0,x.costs-funds);
-    return {maximum,incomeMaximum,needed,gap,funds,budget:Math.max(0,maximum+funds-x.costs),testRate,limiting,scenarios,energy:energy[x.label],debt,monthly:payment(maximum,x.rate,months),neededMonthly:payment(needed,x.rate,months),months};
+    const withoutMeasures=Math.floor(limiting.withoutMeasures);
+    return {maximum,incomeMaximum,withoutMeasures,extraForMeasures:incomeMaximum-withoutMeasures,measuresAllowance,creditCharge,annuityFactor,thirtyYearFactor,needed,gap,funds,budget:Math.max(0,maximum+funds-x.costs),testRate,limiting,scenarios,energy:energy[x.label],debt,monthly:payment(maximum,x.rate,months),neededMonthly:payment(needed,x.rate,months),months};
   }
   function schedule(principal,rate,months) {
     const amount=payment(principal,rate,months);let balance=principal,totalInterest=0;const years=[];
