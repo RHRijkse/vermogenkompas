@@ -50,3 +50,10 @@ De pagina bevestigt geen vergunningen of naleving. Echte bedrijfsgegevens, bevoe
 Op `vergelijken.html` staan downloadbare kaarten voor Hypotheek en Vermogen opbouwen. Deze zijn op 15 oktober 2026 gemaakt met de publieke AFM-vergelijkingskaartapplicatie. De PDF’s in `downloads/` bevatten het standaardformat en een conceptvermelding op iedere pagina. Alle diensten, aanbiedersaantallen en prijzen zijn fictieve modelaannames. Er worden geen vergunningnummers of AFM-goedkeuring geclaimd.
 
 Het concept vergelijkt hypotheken van 12 aanbieders en beleggingsfondsen van 8 aanbieders en claimt daarom geen advies op onafhankelijke basis. Hypotheekadvies en bemiddeling voor een volgende koopwoning in loondienst: gemiddeld € 2.950. Alleen advies: € 1.950. Particulier vermogensadvies: € 1.350. De webpagina bevat ook alle overige tariefcategorieën, uitsluitingen en optionele onderhoudstarieven. De voorbeeldgemiddelden zijn geen historische klantgemiddelden.
+
+
+## Onze keuzes en navigatie
+
+`onze-keuzes.html` bevat vier selectiecriteria: maatschappelijke betrokkenheid, klantcommunicatie, duurzame financiële producten en Bad Press. Het uitklapbare onderdeel voor Fase 3 bevat een lege selectiematrix en een algemeen beoordelingskader voor een 4 en een 8. Aanbieders, producten, scores, weging, totaalscores, bronnen en de concrete onderbouwing worden ingevuld zodra het onderzoek is aangeleverd. De drie lege tabelrijen kunnen worden uitgebreid. Vul de cellen in en verwijder daarbij hun tijdelijke `aria-label`. Het verantwoordingsoverzicht is openbaar en heeft geen inlogbeveiliging.
+
+Alle pagina’s gebruiken dezelfde headeropbouw, `navigation.css` en `navigation.js`. Het menu staat links, het logo gecentreerd en Kennismaken rechts. Het menu sluit met het icoon, Escape, een navigatielink of een klik buiten de header. Gesloten links zijn met `inert` uitgesloten van toetsenbordbediening. Bewegingsvoorkeuren worden gerespecteerd. Zonder JavaScript worden alle menulinks zichtbaar weergegeven. De startpagina behoudt haar eigen script voor de wooncheck en het kennismakingsformulier.
