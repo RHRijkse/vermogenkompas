@@ -35,16 +35,19 @@
     <label for="mc-household">Koopt u alleen of samen?</label>
     <select id="mc-household" required>
       <option value="">Kies uw situatie</option>
-      <option value="single">Alleen, ik ben alleenstaand</option>
-      <option value="single-with-partner">Alleen, ik heb een partner</option>
+      <option value="single">Alleen</option>
       <option value="together">Samen</option>
     </select>
   </div>
   <p class="mc-hint" id="mc-income-note">Tel vakantiegeld, AOW en aanvullend pensioen mee waar van toepassing.</p>
   <div id="mc-people"></div>
   <details class="mc-help" id="mc-extras">
-    <summary>Schulden, alimentatie en renteaftrek</summary>
+    <summary>Schulden, renteaftrek en extra leenruimte</summary>
     <div class="mc-extra-fields">
+      <div class="field" id="mc-single-field" hidden>
+        <label class="mc-checkbox"><input id="mc-single-allowance" type="checkbox">Reken met extra leenruimte voor alleenstaanden</label>
+        <small>Vink dit alleen aan als u ook alleenstaand bent.</small>
+      </div>
       <div class="field">
         <label for="mc-debt">Kredietlasten per maand (€)</label>
         <input id="mc-debt" type="number" min="0" max="100000" step="0.01" inputmode="decimal" aria-describedby="mc-debt-hint">
@@ -104,4 +107,4 @@
 <nav class="footer-legal" aria-label="Juridische informatie"><a href="wettelijke-kaders.html">Wettelijke kaders</a></nav>
 <details class="about-disclosure"><summary>Over deze website en uw gegevens</summary><p>Dit is een conceptwebsite. De Woon & VermogenCheck en het kennismakingsformulier op de startpagina verwerken uw invoer alleen in uw browser. Er worden vanuit dit HTML-bestand geen antwoorden of contactgegevens naar een server verstuurd. Als u de pagina opnieuw laadt, verdwijnen de ingevulde gegevens. Een aanvraag die u downloadt, bewaart u zelf op uw apparaat.</p><p>De beschreven werkwijze is een opzet voor VermogenKompas. De daadwerkelijke dienstverlening, tarieven en bedrijfsgegevens moeten voor ingebruikname worden vastgesteld. De foto’s zijn sfeerbeelden en tonen geen medewerkers of klanten van VermogenKompas.</p><p id="photo-credits">Fotografie: <a href="https://unsplash.com/photos/glpYh1cWf0o" target="_blank" rel="noopener noreferrer">Esther Ann</a> en <a href="https://unsplash.com/photos/tHkJAMcO3QE" target="_blank" rel="noopener noreferrer">Francesca Tosolini</a> via Unsplash, gebruikt onder de <a href="https://unsplash.com/license" target="_blank" rel="noopener noreferrer">Unsplash-licentie</a>. Lettertype: Manrope.</p></details>
 </div>
-</footer><script src="site.js"></script><script src="mortgage-norms.js"></script><script src="mortgage-engine.js"></script><script src="mortgage-ui.js?v=4"></script><script src="navigation.js"></script></body></html>
+</footer><script src="site.js"></script><script src="mortgage-norms.js"></script><script src="mortgage-engine.js"></script><script src="mortgage-ui.js?v=5"></script><script src="navigation.js"></script></body></html>

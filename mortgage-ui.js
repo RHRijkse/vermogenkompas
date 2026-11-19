@@ -48,7 +48,10 @@
   $('mc-people').append(person(0), person(1));
 
   function sync() {
-    const together = $('mc-household').value === 'together';
+    const household = $('mc-household').value;
+    const together = household === 'together';
+    $('mc-single-field').hidden = household !== 'single';
+    $('mc-single-allowance').disabled = household !== 'single';
     const partner = $('mc-person-1');
     partner.hidden = !together;
     partner.disabled = !together;
@@ -94,7 +97,7 @@
     return {
       ...scenario,
       people,
-      singleAllowance: household === 'single',
+      singleAllowance: household === 'single' && $('mc-single-allowance').checked,
       deductible: $('mc-deductible').checked,
       monthlyDebt: value('mc-debt'),
       duo: value('mc-duo'),
