@@ -6,7 +6,7 @@ De startpagina begint met een compacte introductie, een directe uitnodiging voor
 
 ## Hypotheekcalculator
 
-De calculator staat op `hypotheek.html#hypotheek` en gebruikt `mortgage-engine.js`, `mortgage-norms.js`, `mortgage-ui.js` en `mortgage.css`. Het formulier vraagt naar de huishoudsituatie, bruto jaarinkomen en AOW. Invoer voor een partner of verwacht pensioen verschijnt wanneer nodig. Schulden, partneralimentatie en volledige renteaftrek zijn uitklapbaar. De calculator rekent met 4% voorbeeldrente, 10 jaar rentevast en een looptijd van 30 jaar. Bij de uitkomst staat ook de bruto maandlast vanaf AOW bij gelijkblijvende rente. Een concrete woning is niet nodig. Invoer blijft in de browser. Downloaden maakt lokaal een tekstbestand; de bestaande kennismakingsfunctie verstuurt nog geen aanvragen.
+De calculator staat op `hypotheek.html#hypotheek` en gebruikt `mortgage-engine.js`, `mortgage-norms.js`, `mortgage-ui.js` en `mortgage.css`. Het formulier vraagt naar de huishoudsituatie, bruto jaarinkomen en AOW. Invoer voor een partner of verwacht pensioen verschijnt wanneer nodig. Schulden, partneralimentatie en volledige renteaftrek zijn uitklapbaar. De calculator rekent met 4% voorbeeldrente, 10 jaar rentevast en een looptijd van 30 jaar. Bij AOW binnen tien jaar vergelijken we de maximale bruto maandlast per periode volgens de leennormen van 2026. De bruto maandlast bij het geschatte leenbedrag staat apart. Een concrete woning is niet nodig. Invoer blijft in de browser. Downloaden maakt lokaal een tekstbestand; de bestaande kennismakingsfunctie verstuurt nog geen aanvragen.
 
 ### Rekenen en toetsen
 
