@@ -111,13 +111,33 @@
     };
   }
 
+  function compareAowPeriods(people, result) {
+    if (result.scenarios.length === 1) return [];
+
+    // The scenarios are ordered by transition bitmask, with applicants in form order.
+    let labels;
+    if (people.length === 1) {
+      labels = ['Vóór AOW', 'Vanaf AOW'];
+    } else if (people.every((person) => person.status === 'soon')) {
+      labels = ['Vóór AOW van u beiden', 'Als u als eerste AOW krijgt', 'Als uw partner als eerste AOW krijgt', 'Vanaf AOW van u beiden'];
+    } else {
+      labels = people[0].status === 'soon'
+        ? ['Vóór uw AOW', 'Vanaf uw AOW']
+        : ['Vóór AOW van uw partner', 'Vanaf AOW van uw partner'];
+    }
+
+    return result.scenarios.map(({ income, maximum }, index) => ({
+      label: labels[index],
+      income: euros.format(income),
+      monthly: cents.format(engine.payment(Math.floor(maximum), result.testRate, result.months))
+    }));
+  }
+
   function render() {
     const input = readInput();
     const result = engine.calculate(input);
     const schedule = engine.schedule(result.maximum, input.rate, result.months);
-    const receivingAow = input.people.every((person) => person.status === 'aow');
-    const grossMonthly = cents.format(result.monthly);
-    const monthlyLabel = receivingAow ? 'Bruto maandlast met AOW' : 'Bruto maandlast nu';
+    const periods = compareAowPeriods(input.people, result);
     const rows = [
       ['Toetsinkomen per jaar', euros.format(result.limiting.income)],
       ['Rente', percentage.format(result.testRate) + '%'],
@@ -127,16 +147,23 @@
     ];
     const notes = [];
     if (result.limiting.single) notes.push('Inclusief ' + euros.format(result.limiting.single) + ' extra leenruimte voor alleenstaanden.');
-    if (result.scenarios.length > 1) notes.push('De laagste uitkomst bij huidig inkomen of pensioen is gebruikt.');
+    if (periods.length === 0 && input.people.some((person) => person.status === 'later')) {
+      notes.push('De vergelijking vanaf AOW is beschikbaar als AOW binnen 10 jaar ingaat.');
+    }
     if (result.maximum === 0) notes.push('Met deze invoer is er geen leenruimte.');
     if (new Date().getFullYear() !== 2026) notes.push('Gebaseerd op de leennormen van 2026.');
-    last = { input, result, rows, notes, receivingAow, monthlyLabel };
+    last = { input, result, rows, notes, periods };
 
     $('mc-maximum').textContent = euros.format(result.maximum);
-    $('mc-monthly-label').textContent = monthlyLabel;
-    $('mc-monthly').textContent = grossMonthly;
-    $('mc-aow').hidden = receivingAow;
-    $('mc-aow-monthly').textContent = grossMonthly;
+    $('mc-monthly').textContent = cents.format(result.monthly);
+    $('mc-aow-comparison').hidden = periods.length === 0;
+    $('mc-aow-periods').replaceChildren(...periods.map(({ label, income, monthly }) => {
+      const row = document.createElement('div');
+      const term = node('dt', label);
+      term.append(node('small', 'Toetsinkomen: ' + income + ' per jaar'));
+      row.append(term, node('dd', monthly));
+      return row;
+    }));
     $('mc-breakdown').replaceChildren(...rows.flatMap(([label, value]) => [node('dt', label), node('dd', value)]));
     $('mc-notes').textContent = notes.join(' ');
     $('mc-notes').hidden = notes.length === 0;
@@ -173,8 +200,7 @@
 
   $('mc-save').addEventListener('click', () => {
     if (!last) return;
-    const { input, result, rows, notes, receivingAow, monthlyLabel } = last;
-    const grossMonthly = cents.format(result.monthly);
+    const { input, result, rows, notes, periods } = last;
     const lines = [
       'VERMOGENKOMPAS | HYPOTHEEKBEREKENING',
       new Date().toLocaleDateString('nl-NL') + ' | Leennormen 2026',
@@ -183,8 +209,14 @@
         + statusLabels[p.status] + (p.status === 'soon' ? ', verwacht jaarinkomen vanaf AOW ' + euros.format(p.pension) : '')),
       '',
       'Indicatie maximale hypotheek: ' + euros.format(result.maximum),
-      monthlyLabel + ': ' + grossMonthly,
-      ...(receivingAow ? [] : ['Bruto maandlast vanaf AOW: ' + grossMonthly + ' bij gelijkblijvende rente zolang de lening loopt.']),
+      'Bruto maandlast bij dit leenbedrag: ' + cents.format(result.monthly),
+      ...(periods.length ? [
+        '',
+        'Maximale bruto maandlast volgens de leennormen',
+        ...periods.map(({ label, income, monthly }) => label + ': ' + monthly + ' (toetsinkomen ' + income + ' per jaar)'),
+        $('mc-aow-explanation').textContent,
+        ''
+      ] : []),
       ...rows.map(([label, value]) => label + ': ' + value),
       'Maandelijkse kredietlasten: ' + cents.format(input.monthlyDebt),
       'Maandelijkse DUO-termijn: ' + cents.format(input.duo),

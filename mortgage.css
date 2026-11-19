@@ -54,10 +54,31 @@
   padding: 15px 0;
   border-block: 1px solid #ffffff30;
 }
-.mc-monthly-item { display: grid; gap: 4px; }
-.mc-monthly-aow { margin-top: 9px; padding-top: 12px; border-top: 1px solid #ffffff30; }
 .mc-monthly strong { font-size: 1.65rem; }
-.mc-monthly small { font-size: .875rem; color: #d2dfdf; }
+
+.mc-aow-comparison {
+  margin-top: 20px;
+  padding: clamp(14px, 2vw, 22px);
+  border: 1px solid #ffffff30;
+  border-radius: 12px;
+  background: #ffffff0a;
+}
+.calculator-output .mc-aow-comparison h3 { margin-bottom: 4px; font-size: 1.2rem; }
+.mc-aow-comparison p { font-size: .9375rem; }
+.mc-aow-periods { margin: 12px 0; }
+.mc-aow-periods > div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 16px;
+  padding: 10px 0;
+  border-block-start: 1px solid #ffffff30;
+}
+.mc-aow-periods dt { font-weight: 700; }
+.mc-aow-periods small { display: block; color: #d2dfdf; font-size: .875rem; font-weight: 400; }
+.mc-aow-periods dd { margin: 0; color: var(--mint); font-weight: 750; white-space: nowrap; }
+
 .mc-note, .mc-result-details, .mc-disclaimer { margin-top: 16px; }
 .mc-note, .mc-disclaimer { font-size: .9rem; }
 .mc-result-details summary:focus-visible { outline-color: var(--mint); }
