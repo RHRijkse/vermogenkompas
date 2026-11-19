@@ -1,3 +1,18 @@
+.page-intro { padding-block: clamp(30px, 5vw, 64px); }
+.page-cta { padding-block: clamp(28px, 4vw, 52px); }
+
+.page-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 24px;
+}
+.page-actions > a:not(.btn) {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
 .page-jumps {
   display: flex;
   flex-wrap: wrap;
@@ -52,7 +67,7 @@ main summary:focus-visible { outline: 2px solid var(--green); outline-offset: 4p
   main :is(.hero-actions, .page-jumps) { animation-delay: 100ms; }
 
   main details[open] > :not(summary),
-  main :is(#result-view, #contact-review, #mc-result, .mc-step):not([hidden]) {
+  main :is(#result-view, #contact-review, #mc-result, #investment-result):not([hidden]) {
     animation: content-fade 280ms ease-out;
   }
 

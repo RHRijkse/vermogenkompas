@@ -6,7 +6,7 @@ De startpagina begint met een compacte introductie, een directe uitnodiging voor
 
 ## Hypotheekcalculator
 
-De calculator staat op `hypotheek.html#hypotheek` en gebruikt `mortgage-engine.js`, `mortgage-norms.js`, `mortgage-ui.js` en `mortgage.css`. De twee invoerstappen vragen naar inkomen, hypotheekrente, looptijd en financiële verplichtingen. Een concrete woning is niet nodig. Invoer blijft in de browser. Downloaden maakt lokaal een tekstbestand; de bestaande kennismakingsfunctie verstuurt nog geen aanvragen.
+De calculator staat op `hypotheek.html#hypotheek` en gebruikt `mortgage-engine.js`, `mortgage-norms.js`, `mortgage-ui.js` en `mortgage.css`. Het formulier vraagt naar de huishoudsituatie, bruto jaarinkomen en AOW. Invoer voor een partner of verwacht pensioen verschijnt wanneer nodig. Schulden, partneralimentatie en volledige renteaftrek zijn uitklapbaar. De calculator rekent met 4% voorbeeldrente, 10 jaar rentevast en een looptijd van 30 jaar. Bij de uitkomst staat ook de bruto maandlast vanaf AOW bij gelijkblijvende rente. Een concrete woning is niet nodig. Invoer blijft in de browser. Downloaden maakt lokaal een tekstbestand; de bestaande kennismakingsfunctie verstuurt nog geen aanvragen.
 
 ### Rekenen en toetsen
 
@@ -26,7 +26,7 @@ Vrijstellingen voor alleenstaanden, energielabel en maatregelen worden eerst ged
 
 De engine accepteert aanvullend `creditLimit` en `energyMeasures`, beide standaard nul. Een kredietlimiet veroorzaakt 2% maandelijkse toetslast. `monthlyDebt` bevat uitsluitend andere al getoetste maandlasten als daarnaast `creditLimit` wordt meegegeven. Het maatregelenbudget wordt begrensd op het maximum van het bestaande energielabel. `withoutMeasures` geeft de LTI-ruimte zonder maatregelen en `extraForMeasures` het verschil met de totale LTI-ruimte.
 
-Het bestaande formulier, alle teksten en de vormgeving zijn ongewijzigd. Jaarinkomen wordt inclusief vakantiegeld en vaste extra's ingevuld. De kredietinvoer blijft een maandelijkse toetslast. Het formulier geeft geen label of maatregelenbudget door en rekent daarmee zonder energievrijstellingen.
+Jaarinkomen wordt inclusief vakantiegeld en vaste extra's ingevuld. De kredietinvoer blijft een maandelijkse toetslast. Het formulier geeft geen label of maatregelenbudget door en rekent daarmee zonder energievrijstellingen.
 
 De aangeleverde werkboekformules zijn lokaal opnieuw berekend in artifact-tool en met de engine vergeleken. Het oorspronkelijke Excelbestand is niet aangepast en financiële casusgegevens worden niet in deze repository opgenomen. De openbare regressietests in `test/fixtures/lti-2026-synthetic.json` gebruiken uitsluitend verzonnen invoer en onafhankelijk met Python Decimal berekende uitkomsten. Zij controleren alle labels, kortere looptijden, rentegrenzen en negatieve maandruimte. De bestaande AOW-, DUO-, nulrente- en woningberekeningen blijven aanvullingen op het beperktere bereik van het Excelmodel.
 
@@ -39,7 +39,7 @@ De synthetische referentie-uitkomsten zijn reproduceerbaar met `python3 scripts/
 - [AFM-toetsrente derde kwartaal 2026: 5%](https://www.afm.nl/nl-nl/sector/actueel/2026/jun/sb-toetstrente-q3-2026).
 - [ABN AMRO-calculator](https://hypotheken.abnamro.nl/snelle-hypotheek-berekening/app): inspiratie voor de invoer, het resultatenpaneel en de uitleg; eigen vormgeving en implementatie.
 
-**Onderhoud nodig:** controleer elk kwartaal de AFM-toetsrente en jaarlijks alle leennormen. Werk engine, tabellen, peildatum, uitleg en tests samen bij. De 4% in het formulier is een voorbeeldrente, geen actueel banktarief. Er is geen externe rente-API.
+**Onderhoud nodig:** controleer elk kwartaal de AFM-toetsrente en jaarlijks alle leennormen. Werk engine, tabellen, peildatum, uitleg en tests samen bij. De vaste 4% is een voorbeeldrente, geen actueel banktarief. Er is geen externe rente-API.
 
 ### Afbakening
 
@@ -48,6 +48,10 @@ Dit is een oriënterende annuïteitenberekening, geen acceptatie-engine van een 
 Voor AOW binnen tien jaar berekenen we alle combinaties van de opgegeven toekomstige pensioeninkomens. We kiezen de laagste leencapaciteit en rekenen voorzichtig met de oorspronkelijke hoofdsom en looptijd; toekomstige aflossing wordt niet meegenomen. Dit kan lager uitvallen dan een volledige toets bij de geldverstrekker. De aftrekkeuze geldt voor de volledige lening en looptijd. Gemengde leningdelen, een verstreken aftrektermijn en de bijleenregeling vereisen individueel advies.
 
 De getoonde indicatie is de inkomensgebonden leencapaciteit (LTI): toetsinkomen maal de toepasselijke financieringslastquote, verminderd met verplichtingen en omgerekend naar een annuïtaire lening. Zonder een specifieke woning worden de woningwaarde (LTV), energielabelruimte, aankoopkosten, eigen geld en overwaarde niet meegenomen. Geen verduurzamingsdepots, seniorenmaatwerk, overbrugging, bestaande leningdelen, NHG-toelatingsbeslissing of netto-maandlastberekening. Het aflossingsschema veronderstelt dezelfde rente over de volledige looptijd.
+
+## Rendementscalculator
+
+Op `beleggen.html#rendement` staan drie velden voor startbedrag, maandelijkse inleg en looptijd. De voorbeeldberekening gebruikt 4% effectief rendement per jaar. Inleg vindt aan het einde van elke maand plaats. Kosten, belasting en inflatie zijn buiten beschouwing gelaten.
 
 ## Informatiepagina’s
 
@@ -70,4 +74,4 @@ Het concept vergelijkt hypotheken van 12 aanbieders en beleggingsfondsen van 8 a
 
 `onze-keuzes.html` legt per dienst uit hoe maatschappelijke betrokkenheid, Bad Press en duurzaamheidsbeleid worden beoordeeld. Het onderdeel Verantwoording bevat aparte selectiematrices voor hypotheek en beleggen met een gedeeld beoordelingskader voor een 4 en een 8. Aanbieders, producten, scores, weging, totaalscores, bronnen en onderbouwing worden ingevuld zodra het onderzoek is aangeleverd. Voeg zo nodig rijen toe en verwijder het tijdelijke `aria-label` zodra een cel is ingevuld.
 
-Alle pagina’s gebruiken dezelfde headeropbouw, `navigation.css` en `navigation.js`. Het menu staat links, het logo met de link naar de startpagina staat in het midden en Kennismaken staat rechts. Het menu sluit met het icoon, Escape, een navigatielink of een klik buiten de header. Gesloten links zijn met `inert` uitgesloten van toetsenbordbediening. Bewegingsvoorkeuren worden gerespecteerd. Zonder JavaScript worden alle menulinks zichtbaar weergegeven. De startpagina behoudt haar eigen script voor de wooncheck en het kennismakingsformulier.
+Alle pagina’s gebruiken dezelfde headeropbouw, `navigation.css` en `navigation.js`. Het menu staat links, het logo met de link naar de startpagina staat in het midden en Kennismaken staat rechts. Het menu sluit met het icoon, Escape, een navigatielink of een klik buiten de header. Gesloten links zijn met `inert` uitgesloten van toetsenbordbediening. Korte animaties zijn zichtbaar voor alle bezoekers. Zonder JavaScript worden alle menulinks zichtbaar weergegeven. De startpagina behoudt haar eigen script voor de wooncheck en het kennismakingsformulier.

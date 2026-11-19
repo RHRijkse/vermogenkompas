@@ -1,76 +1,205 @@
-(function(){
+(function () {
   'use strict';
-  const $=id=>document.getElementById(id), engine=window.MortgageEngine;
-  const euro=n=>new Intl.NumberFormat('nl-NL',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(n);
-  const cents=n=>new Intl.NumberFormat('nl-NL',{style:'currency',currency:'EUR'}).format(n);
-  const pct=n=>new Intl.NumberFormat('nl-NL',{maximumFractionDigits:3}).format(n)+'%';
-  let step=0,last=null;
-  function node(tag,text){const n=document.createElement(tag);n.textContent=text;return n;}
-  function person(i){
-    const box=document.createElement('div');box.className='mc-person';box.id='mc-person-'+i;
-    box.innerHTML='<h4>'+(i?'Uw partner':'Uzelf')+'</h4><div class="field"><label for="mc-income-'+i+'">'+(i?'Bruto jaarinkomen partner (€)':'Uw bruto jaarinkomen (€)')+'</label><input id="mc-income-'+i+'" type="number" min="0" max="1000000" step="1" required inputmode="numeric"></div><div class="field"><label for="mc-status-'+i+'">'+(i?'AOW-situatie partner':'Uw AOW-situatie')+'</label><select id="mc-status-'+i+'" required><option value="">Maak een keuze</option><option value="aow">AOW-leeftijd al bereikt</option><option value="soon">AOW-leeftijd binnen 10 jaar</option><option value="later">AOW-leeftijd over meer dan 10 jaar</option></select></div><div class="field" id="mc-pension-field-'+i+'" hidden><label for="mc-pension-'+i+'">Verwacht bruto jaarinkomen vanaf AOW'+(i?' partner':'')+' (€)</label><input id="mc-pension-'+i+'" type="number" min="0" max="1000000" step="1" inputmode="numeric" disabled><small>Tel AOW en aanvullend pensioen op, inclusief vakantiegeld. Gebruik bijvoorbeeld uw pensioenoverzicht. We toetsen ook met dit inkomen.</small></div>';
+
+  const $ = (id) => document.getElementById(id);
+  const engine = window.MortgageEngine;
+  const form = $('mc-form');
+  const scenario = { rate: 4, fixedYears: 10, years: 30 };
+  const statusLabels = {
+    aow: 'AOW-leeftijd bereikt',
+    soon: 'Binnen 10 jaar AOW',
+    later: 'Over meer dan 10 jaar AOW'
+  };
+  const euros = new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
+  const cents = new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' });
+  const percentage = new Intl.NumberFormat('nl-NL', { maximumFractionDigits: 3 });
+  let last = null;
+
+  function node(tag, text) {
+    const element = document.createElement(tag);
+    element.textContent = text;
+    return element;
+  }
+
+  function person(i) {
+    const box = document.createElement('fieldset');
+    box.className = 'mc-person';
+    box.id = 'mc-person-' + i;
+    box.setAttribute('aria-label', i ? 'Uw partner' : 'Uzelf');
+    box.innerHTML = `
+      <div class="field">
+        <label for="mc-income-${i}">${i ? 'Bruto jaarinkomen partner' : 'Uw bruto jaarinkomen'} (€)</label>
+        <input id="mc-income-${i}" type="number" min="0" max="1000000" step="1" required inputmode="numeric" aria-describedby="mc-income-note">
+      </div>
+      <div class="field">
+        <label for="mc-status-${i}">${i ? 'AOW-situatie partner' : 'Uw AOW-situatie'}</label>
+        <select id="mc-status-${i}" required>
+          <option value="">Kies uw situatie</option>
+          ${Object.entries(statusLabels).map(([value, label]) => `<option value="${value}">${label}</option>`).join('')}
+        </select>
+      </div>
+      <div class="field" id="mc-pension-field-${i}" hidden>
+        <label for="mc-pension-${i}">Verwacht bruto jaarinkomen vanaf AOW${i ? ' partner' : ''} (€)</label>
+        <input id="mc-pension-${i}" type="number" min="0" max="1000000" step="1" inputmode="numeric" aria-describedby="mc-income-note" disabled>
+      </div>`;
     return box;
   }
-  $('mc-people').append(person(0),person(1));
-  function sync(){
-    const together=$('mc-household').value==='together';
-    $('mc-person-1').hidden=!together;$('mc-single-field').hidden=together;
-    for(let i=0;i<2;i++){
-      const active=i===0||together,soon=$('mc-status-'+i).value==='soon';
-      $('mc-income-'+i).disabled=!active;$('mc-status-'+i).disabled=!active;
-      $('mc-pension-field-'+i).hidden=!soon;$('mc-pension-'+i).disabled=!active||!soon;$('mc-pension-'+i).required=active&&soon;
+
+  $('mc-people').append(person(0), person(1));
+
+  function sync() {
+    const together = $('mc-household').value === 'together';
+    const partner = $('mc-person-1');
+    partner.hidden = !together;
+    partner.disabled = !together;
+    for (let i = 0; i < 2; i++) {
+      const soon = $('mc-status-' + i).value === 'soon';
+      const pension = $('mc-pension-' + i);
+      $('mc-pension-field-' + i).hidden = !soon;
+      pension.disabled = !soon;
+      pension.required = soon;
     }
   }
-  function invalidate(){last=null;$('mc-result').hidden=true;$('mc-empty').hidden=false;$('mc-schedule-box').hidden=true;}
-  function showStep(focus){
-    for(let i=0;i<2;i++){$('mc-step-'+i).hidden=i!==step;const li=document.querySelectorAll('.mc-steps li')[i];if(i===step)li.setAttribute('aria-current','step');else li.removeAttribute('aria-current');}
-    $('mc-back').hidden=step===0;
-    $('mc-next').textContent=['Verder naar hypotheek →','Bereken mijn hypotheek →'][step];
-    $('mc-error').hidden=true;
-    if(focus)$('mc-step-'+step).querySelector('legend').focus();
+
+  function invalidate() {
+    last = null;
+    $('mc-result').hidden = true;
+    $('mc-empty').hidden = false;
+    $('mc-schedule-box').hidden = true;
   }
-  function validate(current){
-    const fields=[...$('mc-step-'+current).querySelectorAll('input,select')].filter(n=>!n.disabled);
-    const invalid=fields.find(n=>!n.checkValidity());
-    fields.forEach(n=>n.removeAttribute('aria-invalid'));
-    if(invalid){step=current;showStep(false);invalid.setAttribute('aria-invalid','true');$('mc-error').textContent='Controleer '+(document.querySelector('label[for="'+invalid.id+'"]').textContent||'uw invoer')+'. Vul een geldig bedrag of een keuze in.';$('mc-error').hidden=false;invalid.focus();return false;}
-    return true;
+
+  function validate() {
+    const fields = [...form.querySelectorAll('input, select')];
+    fields.forEach((field) => field.removeAttribute('aria-invalid'));
+    const invalid = fields.find((field) => field.willValidate && !field.checkValidity());
+    if (!invalid) return true;
+
+    const details = invalid.closest('details');
+    if (details) details.open = true;
+    invalid.setAttribute('aria-invalid', 'true');
+    $('mc-error').textContent = invalid.labels[0].textContent + '. ' + invalid.validationMessage;
+    $('mc-error').hidden = false;
+    invalid.focus();
+    return false;
   }
-  function input(){
-    const value=id=>Number($(id).value);
-    return {people:[0,...($('mc-household').value==='together'?[1]:[])].map(i=>({income:value('mc-income-'+i),status:$('mc-status-'+i).value,pension:value('mc-pension-'+i)})),singleAllowance:$('mc-single').checked,rate:value('mc-rate'),years:value('mc-years'),fixedYears:value('mc-fixed'),deductible:$('mc-deductible').value==='yes',monthlyDebt:value('mc-debt'),duo:value('mc-duo'),alimony:value('mc-alimony'),propertyValue:0,purchasePrice:0,label:'unknown',ownMoney:0,equity:0,costs:0};
+
+  function readInput() {
+    const value = (id) => Number($(id).value);
+    const household = $('mc-household').value;
+    const people = (household === 'together' ? [0, 1] : [0]).map((i) => ({
+      income: value('mc-income-' + i),
+      status: $('mc-status-' + i).value,
+      pension: value('mc-pension-' + i)
+    }));
+    return {
+      ...scenario,
+      people,
+      singleAllowance: household === 'single',
+      deductible: $('mc-deductible').checked,
+      monthlyDebt: value('mc-debt'),
+      duo: value('mc-duo'),
+      alimony: value('mc-alimony'),
+      propertyValue: 0,
+      purchasePrice: 0,
+      label: 'unknown',
+      ownMoney: 0,
+      equity: 0,
+      costs: 0
+    };
   }
-  function render(){
-    const x=input(),r=engine.calculate(x),s=engine.schedule(r.maximum,x.rate,r.months);last={x,r,s};
-    $('mc-empty').hidden=true;$('mc-result').hidden=false;$('mc-schedule-box').hidden=false;
-    $('mc-maximum').textContent=euro(r.maximum);$('mc-monthly').textContent=cents(r.monthly);
-    $('mc-basis').textContent='Op basis van uw inkomen en maandelijkse verplichtingen. De waarde van een latere woning moet de lening ook toelaten.';
-    const rows=[['Toetsinkomen per jaar',euro(r.limiting.income)],['Toegestaan deel voor woonlasten',pct(r.limiting.percent)],['Maximale hypotheeklast per maand',cents(Math.max(0,r.limiting.monthly))],['Toetsrente / rentevast',pct(r.testRate)+' / '+x.fixedYears+' jaar'],['Looptijd',x.years+' jaar']];
-    $('mc-breakdown').replaceChildren(...rows.flatMap(([k,v])=>[node('dt',k),node('dd',v)]));
-    const notes=['Toetsinkomen: '+euro(r.limiting.income)+' per jaar. Woonquote: '+pct(r.limiting.percent)+'. Toetsrente: '+pct(r.testRate)+'.'];
-    if(r.limiting.single)notes.push('Inclusief '+euro(r.limiting.single)+' alleenstaandenruimte.');
-    if(r.energy)notes.push('Inclusief '+euro(r.energy)+' energielabelruimte.');
-    if(r.scenarios.length>1)notes.push('Huidig inkomen en pensioen zijn voorzichtig getoetst; de laagste leencapaciteit bepaalt de indicatie.');
-    notes.push('Koopprijs, woningwaarde, energielabel, eigen geld en aankoopkosten zijn nog niet meegenomen.');
-    if(!x.deductible)notes.push('Gerekend zonder fiscale renteaftrek.');
-    if(r.maximum===0)notes.push('Op basis van deze invoer is er geen leenruimte.');
-    if(new Date().getFullYear()!==2026)notes.push('Let op: deze berekening gebruikt de normen van 2026. Laat de actuele leencapaciteit controleren.');
-    $('mc-notes').textContent=notes.join(' ');
-    $('mc-schedule-summary').textContent='Eerste maand: '+cents(s.firstInterest)+' rente en '+cents(s.firstRepayment)+' aflossing. Totale rente bij een gelijkblijvend tarief: '+euro(s.totalInterest)+'.';
-    $('mc-schedule').replaceChildren(...s.years.map(y=>{const tr=document.createElement('tr');tr.append(node('td',y.year),node('td',euro(y.balance)),node('td',euro(y.interest)));return tr;}));
+
+  function render() {
+    const input = readInput();
+    const result = engine.calculate(input);
+    const schedule = engine.schedule(result.maximum, input.rate, result.months);
+    const receivingAow = input.people.every((person) => person.status === 'aow');
+    const grossMonthly = cents.format(result.monthly);
+    const monthlyLabel = receivingAow ? 'Bruto maandlast met AOW' : 'Bruto maandlast nu';
+    const rows = [
+      ['Toetsinkomen per jaar', euros.format(result.limiting.income)],
+      ['Rente', percentage.format(result.testRate) + '%'],
+      ['Rentevaste periode', input.fixedYears + ' jaar'],
+      ['Looptijd', input.years + ' jaar'],
+      ['Renteaftrek', input.deductible ? 'Volledig' : 'Geen']
+    ];
+    const notes = [];
+    if (result.limiting.single) notes.push('Inclusief ' + euros.format(result.limiting.single) + ' extra leenruimte voor alleenstaanden.');
+    if (result.scenarios.length > 1) notes.push('De laagste uitkomst bij huidig inkomen of pensioen is gebruikt.');
+    if (result.maximum === 0) notes.push('Met deze invoer is er geen leenruimte.');
+    if (new Date().getFullYear() !== 2026) notes.push('Gebaseerd op de leennormen van 2026.');
+    last = { input, result, rows, notes, receivingAow, monthlyLabel };
+
+    $('mc-maximum').textContent = euros.format(result.maximum);
+    $('mc-monthly-label').textContent = monthlyLabel;
+    $('mc-monthly').textContent = grossMonthly;
+    $('mc-aow').hidden = receivingAow;
+    $('mc-aow-monthly').textContent = grossMonthly;
+    $('mc-breakdown').replaceChildren(...rows.flatMap(([label, value]) => [node('dt', label), node('dd', value)]));
+    $('mc-notes').textContent = notes.join(' ');
+    $('mc-notes').hidden = notes.length === 0;
+    $('mc-schedule-summary').textContent = 'Eerste maand: ' + cents.format(schedule.firstInterest)
+      + ' rente en ' + cents.format(schedule.firstRepayment) + ' aflossing. Totale rente: ' + euros.format(schedule.totalInterest) + '.';
+    $('mc-schedule').replaceChildren(...schedule.years.map((year) => {
+      const row = document.createElement('tr');
+      row.append(node('td', year.year), node('td', euros.format(year.balance)), node('td', euros.format(year.interest)));
+      return row;
+    }));
+
+    $('mc-empty').hidden = true;
+    $('mc-result').hidden = false;
+    $('mc-schedule-box').hidden = false;
     $('mc-result-title').focus();
   }
-  $('mc-form').addEventListener('input',()=>{invalidate();sync();});
-  $('mc-form').addEventListener('change',()=>{invalidate();sync();});
-  $('mc-back').addEventListener('click',()=>{step=Math.max(0,step-1);showStep(true);});
-  $('mc-form').addEventListener('submit',e=>{
-    e.preventDefault();if(!validate(step))return;
-    if(step<1){step++;showStep(true);return;}
-    for(let i=0;i<2;i++)if(!validate(i))return;
-    try{render();$('mc-error').hidden=true;}catch(error){invalidate();$('mc-error').textContent=error.message;$('mc-error').hidden=false;}
+
+  form.addEventListener('input', () => {
+    invalidate();
+    sync();
   });
-  function summary(){const {x,r}=last;return 'VERMOGENKOMPAS - HYPOTHEEKBEREKENING\n'+new Date().toLocaleDateString('nl-NL')+' • Normen 2026\n\n'+x.people.map((p,i)=>(i?'Partner':'Uzelf')+': bruto jaarinkomen '+euro(p.income)+', '+({aow:'AOW bereikt',soon:'AOW binnen 10 jaar',later:'AOW over meer dan 10 jaar'}[p.status])+(p.status==='soon'?', verwacht pensioen '+euro(p.pension):'')).join('\n')+'\n\nIndicatie maximale hypotheek: '+euro(r.maximum)+'\nBruto maandlast: '+cents(r.monthly)+'\n'+$('mc-breakdown').innerText+'\n\nOverige kredietlasten per maand: '+euro(x.monthlyDebt)+'\nDUO-termijn per maand: '+euro(x.duo)+'\nPartneralimentatie per maand: '+euro(x.alimony)+'\n\n'+$('mc-notes').textContent+'\n\n'+$('mc-method').innerText+'\n\nIndicatie, geen hypotheekaanbod of persoonlijk financieel advies. De waarde van een latere woning en de aankoopkosten zijn nog niet getoetst. Bruto maandlasten zijn exclusief overige woonkosten. Er zijn geen gegevens verstuurd.';}
-  $('mc-save').addEventListener('click',()=>{if(!last)return;const url=URL.createObjectURL(new Blob(['\ufeff'+summary()],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='VermogenKompas-hypotheekberekening.txt';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);});
-  $('mc-discuss').href='index.html?onderwerp=hypotheek#contact';
-  sync();showStep(false);
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    $('mc-error').hidden = true;
+    if (!validate()) return;
+    try {
+      render();
+    } catch (error) {
+      invalidate();
+      $('mc-error').textContent = error.message;
+      $('mc-error').hidden = false;
+    }
+  });
+
+  $('mc-save').addEventListener('click', () => {
+    if (!last) return;
+    const { input, result, rows, notes, receivingAow, monthlyLabel } = last;
+    const grossMonthly = cents.format(result.monthly);
+    const lines = [
+      'VERMOGENKOMPAS | HYPOTHEEKBEREKENING',
+      new Date().toLocaleDateString('nl-NL') + ' | Leennormen 2026',
+      '',
+      ...input.people.map((p, i) => (i ? 'Partner' : 'Uzelf') + ': ' + euros.format(p.income) + ' bruto per jaar, '
+        + statusLabels[p.status] + (p.status === 'soon' ? ', verwacht jaarinkomen vanaf AOW ' + euros.format(p.pension) : '')),
+      '',
+      'Indicatie maximale hypotheek: ' + euros.format(result.maximum),
+      monthlyLabel + ': ' + grossMonthly,
+      ...(receivingAow ? [] : ['Bruto maandlast vanaf AOW: ' + grossMonthly + ' bij gelijkblijvende rente zolang de lening loopt.']),
+      ...rows.map(([label, value]) => label + ': ' + value),
+      'Maandelijkse kredietlasten: ' + cents.format(input.monthlyDebt),
+      'Maandelijkse DUO-termijn: ' + cents.format(input.duo),
+      'Maandelijkse partneralimentatie: ' + cents.format(input.alimony),
+      '',
+      ...notes,
+      $('mc-disclaimer').textContent
+    ];
+    const url = URL.createObjectURL(new Blob(['\ufeff' + lines.join('\n')], { type: 'text/plain;charset=utf-8' }));
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'VermogenKompas-hypotheekberekening.txt';
+    document.body.append(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 10000);
+  });
+
+  sync();
+  $('mc-next').disabled = false;
 })();
