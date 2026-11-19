@@ -51,7 +51,7 @@ De getoonde indicatie is de inkomensgebonden leencapaciteit (LTI): toetsinkomen 
 
 ## Rendementscalculator
 
-Op `beleggen.html#rendement` staan drie velden voor startbedrag, maandelijkse inleg en looptijd. De voorbeeldberekening gebruikt 4% effectief rendement per jaar. Inleg vindt aan het einde van elke maand plaats. Kosten, belasting en inflatie zijn buiten beschouwing gelaten.
+Op `beleggen.html#rendement` laat één schuifregelaar de fictieve ontwikkeling van € 100.000 over nul tot dertig jaar zien. De rekenreeks bevat stijgende en dalende maanden; de jaarstanden volgen vooraf gekozen fictieve rendementen. De eindwaarde en het totaalrendement worden berekend uit hetzelfde pad als de grafiek. Er is geen aanvullende inleg. Kosten, belasting en inflatie zijn buiten beschouwing gelaten.
 
 ## Informatiepagina’s
 

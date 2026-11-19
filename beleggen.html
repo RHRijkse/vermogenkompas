@@ -1,6 +1,6 @@
 <!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#142e3c"><meta name="description" content="Verken of beleggen past bij uw doelen, financiële ruimte en voorkeuren. Lees hoe VermogenKompas beleggingsfondsen vergelijkt."><title>Beleggen | VermogenKompas</title><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='12' fill='%23142e3c'/%3E%3Ccircle cx='24' cy='24' r='15' stroke='%23cfe2b6' fill='none' stroke-width='2'/%3E%3Cpath d='M31 17L27 27L17 31L21 21Z' fill='%23cfe2b6'/%3E%3C/svg%3E"><link rel="stylesheet" href="site.css"><link rel="stylesheet" href="navigation.css">
 <link rel="stylesheet" href="experience.css?v=2">
-<link rel="stylesheet" href="calculator.css">
+<link rel="stylesheet" href="investment.css">
 <script src="experience.js" defer></script>
 <script src="investment-ui.js" defer></script></head><body><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
 <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m16.2 7.8-2.8 5.6-5.6 2.8 2.8-5.6 5.6-2.8Z"/></symbol>
@@ -35,41 +35,56 @@
       <h1>Beleggen voor later</h1>
     </div>
   </section>
-  <section class="calculator-section" id="rendement" aria-labelledby="rendement-title">
+  <section class="investment-section" id="rendement" aria-labelledby="rendement-title">
     <div class="wrap">
       <h2 id="rendement-title">Bereken uw rendement</h2>
-      <div class="calculator-shell">
-        <div class="calculator-input">
-          <form id="investment-form">
-            <div class="field">
-              <label for="investment-start">Startbedrag (€)</label>
-              <input id="investment-start" type="number" min="0" max="10000000" step="0.01" inputmode="decimal" value="0" required>
+      <div class="investment-dashboard">
+        <div class="investment-controls">
+          <p class="investment-starting-value">Fictieve startinleg <strong>€ 100.000</strong></p>
+          <div class="investment-duration">
+            <div class="investment-duration-heading">
+              <label for="investment-years">Looptijd</label>
+              <output id="investment-years-label" for="investment-years" aria-live="off">10 jaar</output>
             </div>
-            <div class="field">
-              <label for="investment-monthly">Maandelijkse inleg (€)</label>
-              <input id="investment-monthly" type="number" min="0" max="100000" step="0.01" inputmode="decimal" value="0" required>
-            </div>
-            <div class="field">
-              <label for="investment-years">Looptijd (jaren)</label>
-              <input id="investment-years" type="number" min="1" max="50" step="1" inputmode="numeric" value="10" required>
-            </div>
-            <button id="investment-submit" class="btn" type="submit" disabled>Bereken rendement</button>
-          </form>
-          <noscript><p>Schakel JavaScript in om het rendement te berekenen.</p></noscript>
-        </div>
-        <div class="calculator-output">
-          <h3 id="investment-placeholder">Uw voorbeeldberekening</h3>
-          <div id="investment-result" hidden>
-            <h3 id="investment-result-title" tabindex="-1">Waarde aan het einde</h3>
-            <p class="calculator-amount" id="investment-balance"></p>
-            <dl class="calculator-breakdown">
-              <dt>Totaal ingelegd</dt><dd id="investment-contributed"></dd>
-              <dt>Groei in dit voorbeeld</dt><dd id="investment-gain"></dd>
-            </dl>
+            <input id="investment-years" type="range" min="0" max="30" step="1" value="10" aria-valuetext="10 jaar" disabled>
+            <div class="investment-range-endpoints" aria-hidden="true"><span>0 jaar</span><span>30 jaar</span></div>
           </div>
-          <p class="calculator-assumptions">Voorbeeld met 4% rendement per jaar, zonder kosten, belasting en inflatie. U kunt uw inleg geheel of gedeeltelijk verliezen.</p>
+          <dl class="investment-stats">
+            <div class="investment-total">
+              <dt>Eindwaarde</dt>
+              <dd id="investment-balance"></dd>
+            </div>
+            <div>
+              <dt>Totaalrendement</dt>
+              <dd id="investment-return"></dd>
+            </div>
+            <div>
+              <dt>In euro’s</dt>
+              <dd id="investment-gain"></dd>
+            </div>
+          </dl>
+          <noscript><p>Schakel JavaScript in om de grafiek te gebruiken.</p></noscript>
         </div>
+        <figure class="investment-figure">
+          <figcaption>Fictieve waardeontwikkeling</figcaption>
+          <svg id="investment-chart" viewBox="0 0 680 300" role="img" aria-labelledby="investment-chart-title investment-chart-desc">
+            <title id="investment-chart-title">Fictieve waardeontwikkeling in euro’s</title>
+            <desc id="investment-chart-desc">De grafiek toont de waarde over de gekozen looptijd.</desc>
+            <defs>
+              <linearGradient id="investment-area-fill" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#cfe2b6" stop-opacity=".28"/>
+                <stop offset="100%" stop-color="#cfe2b6" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <g id="investment-grid" aria-hidden="true"></g>
+            <path id="investment-area" aria-hidden="true"/>
+            <path id="investment-line" aria-hidden="true"/>
+            <circle id="investment-point" r="6" aria-hidden="true" hidden/>
+            <g id="investment-axis" aria-hidden="true"></g>
+          </svg>
+        </figure>
       </div>
+      <p class="investment-disclosure">Fictief voorbeeld zonder kosten, belasting of inflatie. U kunt uw inleg geheel of gedeeltelijk verliezen.</p>
     </div>
   </section>
   <section class="landing-links" aria-labelledby="beleggen-aanpak">
