@@ -1,0 +1,81 @@
+.page-jumps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.page-jumps a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 15px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--green);
+  font-size: .9375rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.page-jumps a:is(:hover, :focus-visible) { border-color: currentColor; }
+
+.profile-details { width: 100%; margin-top: 6px; }
+.profile-details summary {
+  width: fit-content;
+  min-height: 44px;
+  padding: 9px 6px 9px 0;
+  color: var(--green);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.profile-details .profile-bio { margin-top: 6px; }
+.profile-details .profile-bio ul { padding-inline-start: 22px; margin: 8px 0 14px; }
+
+main :is(.principle-card, .criterion-card, .profile-card, .foundation-card, .download-card, .legal-detail-body, .comparison-explainer) p {
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+main summary { scroll-margin-block: 12px; }
+main summary:focus-visible { outline: 2px solid var(--green); outline-offset: 4px; }
+
+@media screen {
+  main .content-arrival,
+  main :is(.hero-copy, .page-intro > .wrap) > :is(.eyebrow, h1, p, .hero-actions, .page-jumps) {
+    animation: content-arrive 420ms ease-out backwards;
+  }
+
+  main :is(.hero-copy, .page-intro > .wrap) > p { animation-delay: 60ms; }
+  main :is(.hero-actions, .page-jumps) { animation-delay: 100ms; }
+
+  main details[open] > :not(summary),
+  main :is(#result-view, #contact-review, #mc-result, .mc-step):not([hidden]) {
+    animation: content-fade 280ms ease-out;
+  }
+
+  main :is(.page-jumps a, .overview-card, summary) {
+    transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, box-shadow 180ms ease;
+  }
+
+  main :is(.btn, .text-link, .overview-link) .icon { transition: transform 180ms ease; }
+  main :is(.btn, .text-link):focus-visible .icon,
+  main .overview-card:focus-visible .overview-link .icon { transform: translateX(3px); }
+
+  @media (hover: hover) {
+    main :is(.btn, .text-link):hover .icon,
+    main .overview-card:hover .overview-link .icon { transform: translateX(3px); }
+  }
+}
+
+@keyframes content-arrive {
+  from { opacity: .76; translate: 0 4px; }
+  to { opacity: 1; translate: 0; }
+}
+
+@keyframes content-fade {
+  from { opacity: .78; }
+  to { opacity: 1; }
+}
