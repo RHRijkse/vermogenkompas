@@ -38,14 +38,21 @@
 }
 
 .costs-callout h2 { font-size: clamp(1.65rem, 3vw, 2.15rem); }
-.costs-callout p { margin-top: 8px; }
 .costs-callout .btn { flex-shrink: 0; }
 .costs-callout .btn:hover { background: #fff; }
 
-.overview-card h3 { font-size: 1.125rem; }
-.overview-card p { font-size: 1rem; }
-.overview-link { font-size: .9375rem; }
+.overview-grid .overview-card {
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  min-height: 76px;
+  padding: 16px;
+}
+.overview-card h3 { margin: 0; font-size: 1.125rem; }
+.overview-link { margin-inline-start: auto; }
 .overview-risk { margin-top: 14px; color: var(--muted); font-size: .9375rem; }
+.check-intro h2 { grid-row: 1; }
+.check-features { grid-row: 1; }
 
 @media (max-width: 760px) {
   .hero-visual {

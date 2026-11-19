@@ -1,5 +1,6 @@
-<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#142e3c"><meta name="description" content="Bereken een indicatie van uw maximale hypotheek op basis van inkomen en verplichtingen."><title>Hypotheek berekenen | VermogenKompas</title><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='12' fill='%23142e3c'/%3E%3Ccircle cx='24' cy='24' r='15' stroke='%23cfe2b6' fill='none' stroke-width='2'/%3E%3Cpath d='M31 17L27 27L17 31L21 21Z' fill='%23cfe2b6'/%3E%3C/svg%3E"><link rel="stylesheet" href="site.css"><link rel="stylesheet" href="mortgage.css?v=3"><link rel="stylesheet" href="navigation.css">
-<link rel="stylesheet" href="experience.css">
+<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#142e3c"><meta name="description" content="Bereken een indicatie van uw maximale hypotheek op basis van inkomen en verplichtingen."><title>Hypotheek berekenen | VermogenKompas</title><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='12' fill='%23142e3c'/%3E%3Ccircle cx='24' cy='24' r='15' stroke='%23cfe2b6' fill='none' stroke-width='2'/%3E%3Cpath d='M31 17L27 27L17 31L21 21Z' fill='%23cfe2b6'/%3E%3C/svg%3E"><link rel="stylesheet" href="site.css"><link rel="stylesheet" href="mortgage.css?v=4"><link rel="stylesheet" href="navigation.css">
+<link rel="stylesheet" href="experience.css?v=2">
+<link rel="stylesheet" href="calculator.css">
 <script src="experience.js" defer></script></head><body><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
 <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m16.2 7.8-2.8 5.6-5.6 2.8 2.8-5.6 5.6-2.8Z"/></symbol>
 <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
@@ -25,54 +26,82 @@
 <div class="navigation-panel" id="navigation-panel"><div class="navigation-clip"><nav class="main-nav wrap" id="main-nav" aria-label="Hoofdnavigatie"><div class="nav-group"><span class="nav-group-title">Wonen &amp; vermogen</span><a href="hypotheek.html" aria-current="page">Hypotheek berekenen<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a><a href="woonwensen.html">Uw woonwensen<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a><a href="beleggen.html">Beleggen<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a><a href="vergelijken.html">Vergelijkingskaart<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></div><div class="nav-group"><span class="nav-group-title">VermogenKompas</span><a href="over-ons.html">Over ons<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a><a href="missie-duurzaamheid.html">Missie en duurzaamheid<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a><a href="onze-keuzes.html">Onze keuzes<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a><a href="klachten.html">Klachten<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a><a href="wettelijke-kaders.html">Wettelijke kaders<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></div></nav></div></div>
 </header>
 <button class="menu-backdrop" type="button" tabindex="-1" aria-hidden="true"></button>
-<noscript><style>.navigation-panel{position:static;grid-template-rows:1fr;visibility:visible;opacity:1}.navigation-panel .nav-group a{opacity:1;transform:none}.site-header{position:relative}.site-header .menu-button{display:none}</style></noscript><main id="inhoud"><section class="page-intro"><div class="wrap"><span class="eyebrow">Hypotheek berekenen</span><h1>Wat kunt u ongeveer lenen?</h1><p>Bereken uw maximale hypotheek en bruto maandlast in twee stappen.</p><nav class="page-jumps" aria-label="Hypotheek kiezen en vergelijken"><a href="#mortgage-title">Start de berekening</a><a href="vergelijken.html#hypotheekkaart">Bekijk advieskosten</a></nav></div></section><section class="section mortgage-section" id="hypotheek" aria-labelledby="mortgage-title">
+<noscript><style>.navigation-panel{position:static;grid-template-rows:1fr;visibility:visible;opacity:1}.navigation-panel .nav-group a{opacity:1;transform:none}.site-header{position:relative}.site-header .menu-button{display:none}</style></noscript><main id="inhoud"><section class="page-intro"><div class="wrap"><h1>Bereken uw hypotheek</h1></div></section><section class="calculator-section mortgage-section" id="hypotheek" aria-label="Hypotheekcalculator">
 <div class="wrap">
-<div class="section-intro"><div><span class="eyebrow">Uw volgende woning in cijfers</span><h2 id="mortgage-title">Bereken uw hypotheek</h2></div><p>Gebruik uw inkomen, rente en financiële verplichtingen. U hoeft nog geen woning op het oog te hebben.</p></div>
-<div class="mc-shell">
-<div class="mc-input">
-<ol class="mc-steps" aria-label="Stappen hypotheekberekening"><li aria-current="step"><span>1</span>Inkomen</li><li><span>2</span>Hypotheek</li></ol>
+<div class="calculator-shell">
+<div class="calculator-input">
 <form id="mc-form" novalidate>
-<fieldset class="mc-step" id="mc-step-0"><legend tabindex="-1">Uw inkomen en huishouden</legend><p class="mc-hint">Gebruik bruto jaarbedragen, inclusief vakantiegeld. AOW en aanvullend pensioen tellen mee.</p>
-<div class="field"><label for="mc-household">Koopt u alleen of samen?</label><select id="mc-household"><option value="alone">Alleen</option><option value="together">Samen</option></select></div>
-<div class="field" id="mc-single-field"><label class="mc-checkbox"><input id="mc-single" type="checkbox" checked>Ik ben alleenstaand (geen partner in mijn huishouden)</label><small>Alleen kopen is niet altijd hetzelfde als alleenstaand zijn.</small></div>
-<div id="mc-people"></div>
-<details class="mc-help"><summary>Welk inkomen vult u in?</summary><p>Vul structureel bruto inkomen in. Bent u met AOW? Tel AOW, aanvullend pensioen en andere bestendige inkomsten bij elkaar op. Tijdelijke toeslagen en het vermogen zelf zijn geen jaarinkomen. Laat inkomen uit een onderneming, tijdelijk werk of beleggingen eerst als toetsinkomen vaststellen door een adviseur.</p></details>
-</fieldset>
-<fieldset class="mc-step" id="mc-step-1" hidden><legend tabindex="-1">Uw hypotheek en verplichtingen</legend><p class="mc-hint">We rekenen met een annuïteitenhypotheek: u betaalt iedere maand rente en aflossing.</p>
-<div class="field-row"><div class="field"><label for="mc-rate">Hypotheekrente (%)</label><input id="mc-rate" type="number" min="0" max="20" step="0.001" value="4" required inputmode="decimal" aria-describedby="mc-rate-note"></div><div class="field"><label for="mc-years">Looptijd (jaren)</label><input id="mc-years" type="number" min="1" max="30" step="1" value="30" required inputmode="numeric"></div></div>
-<p class="mc-hint" id="mc-rate-note">4% is een aanpasbare voorbeeldrente, geen actueel aanbod. Vul de rente van uw offerte in.</p>
-<div class="field"><label for="mc-fixed">Hoe lang staat de rente vast?</label><select id="mc-fixed"><option value="1">1 jaar</option><option value="5">5 jaar</option><option value="10" selected>10 jaar</option><option value="15">15 jaar</option><option value="20">20 jaar</option><option value="30">30 jaar</option></select></div>
-<div class="field"><label for="mc-deductible">Is de rente volledig fiscaal aftrekbaar?</label><select id="mc-deductible"><option value="no">Nee / weet ik nog niet</option><option value="yes">Ja, voor dit hele hypotheekbedrag</option></select><small>Bij overwaarde, een bestaande hypotheek of verstreken aftrekjaren is volledige aftrek niet vanzelfsprekend. Bij twijfel rekenen we voorzichtig zonder renteaftrek.</small></div>
-<div class="field"><label for="mc-debt">Overige kredietlasten per maand (€)</label><input id="mc-debt" type="number" min="0" max="100000" step="0.01" value="0" required inputmode="decimal"><small>Toetslast van leningen, private lease en kredietlimieten samen, exclusief DUO en de hypotheek die u aflost bij verkoop. Vraag uw adviseur naar de juiste toetslast; die kan hoger zijn dan uw werkelijke betaling.</small></div>
-<div class="field-row"><div class="field"><label for="mc-duo">DUO-termijn per maand (€)</label><input id="mc-duo" type="number" min="0" max="100000" step="0.01" value="0" required inputmode="decimal"></div><div class="field"><label for="mc-alimony">Betaalde partneralimentatie per maand (€)</label><input id="mc-alimony" type="number" min="0" max="100000" step="0.01" value="0" required inputmode="decimal"></div></div>
-<p class="mc-hint">Gebruik voor DUO het wettelijke termijnbedrag, ook bij een betaalpauze of een verlaging naar draagkracht. Bij renteaftrek verhogen we deze toetslast met de wettelijke bruteringsfactor.</p>
-</fieldset>
-<p id="mc-error" class="mc-error" role="alert" hidden></p>
-<div class="mc-actions"><button type="button" class="back-button" id="mc-back" hidden>← Vorige</button><button type="submit" class="btn" id="mc-next">Verder naar hypotheek →</button></div>
+  <div class="field">
+    <label for="mc-household">Koopt u alleen of samen?</label>
+    <select id="mc-household" required>
+      <option value="">Kies uw situatie</option>
+      <option value="single">Alleen, ik ben alleenstaand</option>
+      <option value="single-with-partner">Alleen, ik heb een partner</option>
+      <option value="together">Samen</option>
+    </select>
+  </div>
+  <p class="mc-hint" id="mc-income-note">Tel vakantiegeld, AOW en aanvullend pensioen mee waar van toepassing.</p>
+  <div id="mc-people"></div>
+  <details class="mc-help" id="mc-extras">
+    <summary>Schulden, alimentatie en renteaftrek</summary>
+    <div class="mc-extra-fields">
+      <div class="field">
+        <label for="mc-debt">Kredietlasten per maand (€)</label>
+        <input id="mc-debt" type="number" min="0" max="100000" step="0.01" inputmode="decimal" aria-describedby="mc-debt-hint">
+        <small id="mc-debt-hint">Vul de toetslast van leningen, private lease en kredietlimieten in. Laat DUO en een hypotheek die u aflost bij verkoop hier weg.</small>
+      </div>
+      <div class="field">
+        <label for="mc-duo">DUO-termijn per maand (€)</label>
+        <input id="mc-duo" type="number" min="0" max="100000" step="0.01" inputmode="decimal" aria-describedby="mc-duo-hint">
+        <small id="mc-duo-hint">Gebruik het wettelijke termijnbedrag, ook bij een betaalpauze of verlaagd bedrag.</small>
+      </div>
+      <div class="field">
+        <label for="mc-alimony">Betaalde partneralimentatie per maand (€)</label>
+        <input id="mc-alimony" type="number" min="0" max="100000" step="0.01" inputmode="decimal">
+      </div>
+      <label class="mc-checkbox"><input id="mc-deductible" type="checkbox">Reken met volledige renteaftrek</label>
+      <small>Vink dit alleen aan als de rente over uw hele lening en looptijd aftrekbaar is.</small>
+    </div>
+  </details>
+  <p id="mc-error" class="mc-error" role="alert" hidden></p>
+  <button type="submit" class="btn" id="mc-next" disabled>Bereken mijn hypotheek</button>
 </form>
 <noscript><p>Schakel JavaScript in om uw hypotheek te berekenen.</p></noscript>
-<p class="mc-privacy"><svg class="icon" aria-hidden="true"><use href="#i-lock"/></svg>Uw invoer blijft in uw browser. Geen account nodig.</p>
+
 </div>
-<aside class="mc-output" aria-label="Uw hypotheekberekening">
-<div class="mc-output-top"><span class="eyebrow">Uw hypotheekkompas</span><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg></div>
-<div id="mc-empty"><h3 id="mc-output-title">Uw resultaat verschijnt hier</h3><p>Vul uw gegevens in voor een indicatie van uw maximale hypotheek en maandlast.</p><div class="mc-preview-number">€ <span>—</span></div><p class="mc-hint">Een eerste indicatie op basis van de leennormen 2026.</p><ul class="mc-benefits"><li>Ook met AOW en pensioen</li><li>Toetsing op inkomen, rente en schulden</li><li>Duidelijk hoe we rekenen</li></ul></div>
+<aside class="calculator-output" aria-label="Uw hypotheekberekening">
+<div id="mc-empty"><h2>Uw indicatie</h2><p>Hier verschijnen uw leenbedrag en bruto maandlast.</p></div>
 <div id="mc-result" hidden>
-<h3 id="mc-result-title" tabindex="-1">Uw berekening</h3><p class="mc-kicker">Indicatie maximale hypotheek</p><p class="mc-amount" id="mc-maximum"></p><p class="mc-basis" id="mc-basis"></p>
-<div class="mc-monthly"><span>Bruto maandlast bij dit maximum</span><strong id="mc-monthly"></strong><small>Rente + aflossing • annuïteitenhypotheek</small></div>
-<dl class="mc-breakdown" id="mc-breakdown"></dl>
-<p id="mc-notes" class="mc-note"></p>
-<a class="btn mc-discuss" href="index.html#contact" id="mc-discuss">Bespreek mijn mogelijkheden →</a><button type="button" class="mc-save" id="mc-save">↓ Download mijn berekening</button>
-<p class="mc-disclaimer">Dit is een indicatie, geen hypotheekaanbod. De geldverstrekker beoordeelt uw volledige situatie. Ook onderhoud, verzekeringen en eventuele VvE-bijdragen komen bij uw woonlasten.</p>
+  <h2 id="mc-result-title" tabindex="-1">Geschat leenbedrag</h2>
+  <p class="calculator-amount" id="mc-maximum"></p>
+  <div class="mc-monthly">
+    <div class="mc-monthly-item"><span id="mc-monthly-label">Bruto maandlast</span><strong id="mc-monthly"></strong></div>
+    <div class="mc-monthly-item mc-monthly-aow" id="mc-aow" hidden>
+      <span>Bruto maandlast vanaf AOW</span><strong id="mc-aow-monthly"></strong>
+      <small>Bij gelijkblijvende rente zolang de lening loopt. Na 10 jaar kan de rente wijzigen.</small>
+    </div>
+  </div>
+  <p id="mc-notes" class="mc-note" hidden></p>
+  <details class="mc-result-details"><summary>Rekengegevens</summary><dl class="calculator-breakdown" id="mc-breakdown"></dl></details>
+  <p class="mc-disclaimer" id="mc-disclaimer">Dit is een indicatie op basis van uw inkomen. Woningwaarde, energielabel en andere woonkosten zijn buiten beschouwing gelaten.</p>
+  <button type="button" class="mc-save" id="mc-save">Download mijn berekening</button>
 </div>
+<p class="calculator-assumptions">Voorbeeld met 4% rente, 10 jaar rentevast en 30 jaar looptijd. Leennormen 2026.</p>
 </aside>
 </div>
-<details class="mc-method" id="mc-method"><summary>Hoe wordt mijn hypotheek berekend?</summary><div class="mc-method-grid"><div><h3>Uw inkomen bepaalt de ruimte</h3><p>We gebruiken de vier officiële financieringslasttabellen uit de Tijdelijke regeling hypothecair krediet 2026: vóór en vanaf AOW, met en zonder renteaftrek. Het gezamenlijke inkomen telt mee. Bij verschillende AOW-statussen bepaalt het hoogste inkomen de tabel. We gebruiken de naast lagere inkomensrij, zonder interpolatie; boven de tabelgrens de laatste rij.</p><p>Bij AOW binnen tien jaar toetsen we ook het opgegeven pensioeninkomen. Voorzichtigheidshalve gebruiken we voor elk scenario de oorspronkelijke hypotheek en looptijd, zonder toekomstige aflossing te verrekenen. Daardoor kan deze indicatie lager zijn dan een volledige bankberekening.</p></div><div><h3>Rente, aflossing en eigen geld</h3><p>De annuïteit is P × r / (1 − (1 + r)<sup>−n</sup>), met r de maandrente en n het aantal maanden. Bij 0% rente is het maandbedrag P / n. Bij minder dan tien jaar rentevast toetsen we op minimaal 5% (AFM, derde kwartaal 2026), behalve als de lening binnen de rentevaste periode is afgelost.</p><p>We berekenen eerst de toegestane jaarlijkse hypotheeklast met de woonquote uit de wettelijke inkomens- en rentetabel. Na aftrek van andere maandelijkse verplichtingen rekenen we deze last om naar een maximaal annuïtair leenbedrag. Waar van toepassing tellen we de alleenstaandenruimte van 2026 mee. Omdat er nog geen woning is gekozen, tellen we geen extra leenruimte voor een energielabel mee en toetsen we de woningwaarde nog niet. Een uiteindelijke hypotheek mag doorgaans niet hoger zijn dan 100% van die waarde. Eigen geld kan het aankoopbudget vergroten, maar niet deze leencapaciteit. Verduurzamingsdepots, overbrugging en maatwerk voor senioren zijn niet meegerekend.</p></div></div><p>De maandlasten zijn bruto. Belastingvoordeel, bestaande leningdelen en de bijleenregeling worden niet individueel berekend. Volledige renteaftrek kiest u alleen als deze voor het hele bedrag en de gekozen looptijd geldt. Voor een gedeeltelijk aftrekbare lening is een berekening per leningdeel nodig.</p><p>Bronnen: <a href="https://wetten.overheid.nl/BWBR0032503/2026-01-01" target="_blank" rel="noopener noreferrer">Tijdelijke regeling hypothecair krediet 2026</a> · <a href="https://www.afm.nl/nl-nl/sector/actueel/2026/jun/sb-toetstrente-q3-2026" target="_blank" rel="noopener noreferrer">AFM-toetsrente Q3 2026</a>. Peildatum: 12 september 2026. De voorbeeldrente is vrij aanpasbaar.</p></details>
-<details class="mc-method" id="mc-schedule-box" hidden><summary>Bekijk rente, aflossing en resterende schuld</summary><div id="mc-schedule-summary"></div><div class="mc-table-scroll"><table class="mc-table"><caption>Jaaroverzicht bij de maximale hypotheek en een gelijkblijvende rente</caption><thead><tr><th scope="col">Jaar</th><th scope="col">Resterende schuld</th><th scope="col">Totaal betaalde rente</th></tr></thead><tbody id="mc-schedule"></tbody></table></div><p>Dit rekenvoorbeeld veronderstelt dat uw rente gedurende de hele looptijd gelijk blijft. Na de rentevaste periode kunnen rente en maandlast veranderen.</p></details>
+<details class="mc-method" id="mc-method">
+  <summary>Hoe rekenen we?</summary>
+  <p>De calculator gebruikt de leennormen van 2026 voor een annuïteitenhypotheek. We kijken naar uw structurele bruto inkomen en trekken de toetslasten van schulden af. Betaalde partneralimentatie verlaagt het toetsinkomen. Bij volledige renteaftrek telt de wettelijke verhogingsfactor voor DUO mee.</p>
+  <p>Gaat u binnen tien jaar met AOW? Dan rekenen we ook met uw verwachte inkomen vanaf AOW, zonder toekomstige aflossing mee te rekenen. De laagste uitkomst geldt. Waar van toepassing tellen we de extra ruimte voor alleenstaanden mee.</p>
+  <p>Zonder gegevens over een woning berekenen we geen woningwaarde, energielabelruimte of aankoopbudget. Eigen geld, overwaarde, overbrugging en maatwerk voor senioren vallen buiten deze indicatie. Uw invoer blijft in uw browser.</p>
+  <p><a href="https://wetten.overheid.nl/BWBR0032503/2026-01-01" target="_blank" rel="noopener noreferrer">Tijdelijke regeling hypothecair krediet 2026</a> · <a href="https://www.afm.nl/nl-nl/consumenten/themas/hypotheken/hypotheek-betalen" target="_blank" rel="noopener noreferrer">AFM over hypotheeklasten</a></p>
+</details>
+<details class="mc-method" id="mc-schedule-box" hidden><summary>Bekijk rente, aflossing en resterende schuld</summary><div id="mc-schedule-summary"></div><div class="mc-table-scroll"><table class="mc-table"><caption>Jaaroverzicht bij de maximale hypotheek en een gelijkblijvende rente</caption><thead><tr><th scope="col">Jaar</th><th scope="col">Resterende schuld</th><th scope="col">Totaal betaalde rente</th></tr></thead><tbody id="mc-schedule"></tbody></table></div><p>Dit schema rekent met dezelfde rente voor alle 30 jaar. Uw rente kan na 10 jaar wijzigen.</p></details>
 </div>
-</section><section class="page-cta" aria-labelledby="page-cta-title"><div class="wrap"><span class="eyebrow">Samen verder kijken</span><h2 id="page-cta-title">Wilt u uw mogelijkheden bespreken?</h2><p>Een eerste gesprek helpt om uw wensen, cijfers en vragen op een rij te zetten.</p><a class="btn btn-light" href="index.html?onderwerp=hypotheek#contact">Kennismaken <svg class="icon"><use href="#i-arrow"/></svg></a></div></section></main><footer class="site-footer">
+</section><section class="page-cta"><div class="wrap page-actions"><a class="btn btn-light" href="index.html?onderwerp=hypotheek#contact">Bespreek uw mogelijkheden</a><a href="vergelijken.html#hypotheekkaart">Bekijk de advieskosten</a></div></section></main><footer class="site-footer">
 <div class="wrap">
-<div class="footer-top"><a class="brand" href="index.html" aria-label="VermogenKompas, naar de startpagina"><svg class="icon mark" aria-hidden="true"><use href="#i-compass"/></svg><span>Vermogen<span>Kompas</span></span></a><nav class="footer-links" aria-label="Navigatie onderaan"><a href="index.html#overwaarde">Overwaarde</a><a href="index.html#werkwijze">Onze aanpak</a><a href="vergelijken.html">Vergelijkingskaart</a><a href="over-ons.html">Over ons</a><a href="missie-duurzaamheid.html">Missie en duurzaamheid</a><a href="onze-keuzes.html">Onze keuzes</a><a href="klachten.html">Klachten</a><a href="index.html#contact">Kennismaken</a></nav></div><div class="footer-bottom"><p>VermogenKompas helpt 50-plussers om een passende volgende stap te vinden voor hun woning én hun vermogen. De informatie en de check op deze website zijn bedoeld als oriëntatie en vervangen geen persoonlijk financieel advies.</p><span>© <span id="year">2026</span> VermogenKompas</span></div>
+<div class="footer-top"><a class="brand" href="index.html" aria-label="VermogenKompas, naar de startpagina"><svg class="icon mark" aria-hidden="true"><use href="#i-compass"/></svg><span>Vermogen<span>Kompas</span></span></a><nav class="footer-links" aria-label="Navigatie onderaan"><a href="index.html#overwaarde">Overwaarde</a><a href="index.html#werkwijze">Onze aanpak</a><a href="vergelijken.html">Vergelijkingskaart</a><a href="over-ons.html">Over ons</a><a href="missie-duurzaamheid.html">Missie en duurzaamheid</a><a href="onze-keuzes.html">Onze keuzes</a><a href="klachten.html">Klachten</a><a href="index.html#contact">Kennismaken</a></nav></div><div class="footer-bottom"><p>Schoolconcept. Geen persoonlijk financieel advies.</p><span>© <span id="year">2026</span> VermogenKompas</span></div>
 <nav class="footer-legal" aria-label="Juridische informatie"><a href="wettelijke-kaders.html">Wettelijke kaders</a></nav>
 <details class="about-disclosure"><summary>Over deze website en uw gegevens</summary><p>Dit is een conceptwebsite. De Woon & VermogenCheck en het kennismakingsformulier op de startpagina verwerken uw invoer alleen in uw browser. Er worden vanuit dit HTML-bestand geen antwoorden of contactgegevens naar een server verstuurd. Als u de pagina opnieuw laadt, verdwijnen de ingevulde gegevens. Een aanvraag die u downloadt, bewaart u zelf op uw apparaat.</p><p>De beschreven werkwijze is een opzet voor VermogenKompas. De daadwerkelijke dienstverlening, tarieven en bedrijfsgegevens moeten voor ingebruikname worden vastgesteld. De foto’s zijn sfeerbeelden en tonen geen medewerkers of klanten van VermogenKompas.</p><p id="photo-credits">Fotografie: <a href="https://unsplash.com/photos/glpYh1cWf0o" target="_blank" rel="noopener noreferrer">Esther Ann</a> en <a href="https://unsplash.com/photos/tHkJAMcO3QE" target="_blank" rel="noopener noreferrer">Francesca Tosolini</a> via Unsplash, gebruikt onder de <a href="https://unsplash.com/license" target="_blank" rel="noopener noreferrer">Unsplash-licentie</a>. Lettertype: Manrope.</p></details>
 </div>
-</footer><script src="site.js"></script><script src="mortgage-norms.js"></script><script src="mortgage-engine.js"></script><script src="mortgage-ui.js"></script><script src="navigation.js"></script></body></html>
+</footer><script src="site.js"></script><script src="mortgage-norms.js"></script><script src="mortgage-engine.js"></script><script src="mortgage-ui.js?v=4"></script><script src="navigation.js"></script></body></html>

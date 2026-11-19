@@ -1,6 +1,8 @@
 <!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#142e3c"><meta name="description" content="Verken of beleggen past bij uw doelen, financiële ruimte en voorkeuren. Lees hoe VermogenKompas beleggingsfondsen vergelijkt."><title>Beleggen | VermogenKompas</title><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='12' fill='%23142e3c'/%3E%3Ccircle cx='24' cy='24' r='15' stroke='%23cfe2b6' fill='none' stroke-width='2'/%3E%3Cpath d='M31 17L27 27L17 31L21 21Z' fill='%23cfe2b6'/%3E%3C/svg%3E"><link rel="stylesheet" href="site.css"><link rel="stylesheet" href="navigation.css">
-<link rel="stylesheet" href="experience.css">
-<script src="experience.js" defer></script></head><body><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+<link rel="stylesheet" href="experience.css?v=2">
+<link rel="stylesheet" href="calculator.css">
+<script src="experience.js" defer></script>
+<script src="investment-ui.js" defer></script></head><body><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
 <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m16.2 7.8-2.8 5.6-5.6 2.8 2.8-5.6 5.6-2.8Z"/></symbol>
 <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
 <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 12H5m6-6-6 6 6 6"/></symbol>
@@ -31,7 +33,43 @@
   <section class="page-intro">
     <div class="wrap">
       <h1>Beleggen voor later</h1>
-      <p>Wilt u vermogen opbouwen voor uw pensioen of een ander doel? Verken of beleggen bij uw plannen en financiële situatie past.</p>
+    </div>
+  </section>
+  <section class="calculator-section" id="rendement" aria-labelledby="rendement-title">
+    <div class="wrap">
+      <h2 id="rendement-title">Bereken uw rendement</h2>
+      <div class="calculator-shell">
+        <div class="calculator-input">
+          <form id="investment-form">
+            <div class="field">
+              <label for="investment-start">Startbedrag (€)</label>
+              <input id="investment-start" type="number" min="0" max="10000000" step="0.01" inputmode="decimal" value="0" required>
+            </div>
+            <div class="field">
+              <label for="investment-monthly">Maandelijkse inleg (€)</label>
+              <input id="investment-monthly" type="number" min="0" max="100000" step="0.01" inputmode="decimal" value="0" required>
+            </div>
+            <div class="field">
+              <label for="investment-years">Looptijd (jaren)</label>
+              <input id="investment-years" type="number" min="1" max="50" step="1" inputmode="numeric" value="10" required>
+            </div>
+            <button id="investment-submit" class="btn" type="submit" disabled>Bereken rendement</button>
+          </form>
+          <noscript><p>Schakel JavaScript in om het rendement te berekenen.</p></noscript>
+        </div>
+        <div class="calculator-output">
+          <h3 id="investment-placeholder">Uw voorbeeldberekening</h3>
+          <div id="investment-result" hidden>
+            <h3 id="investment-result-title" tabindex="-1">Waarde aan het einde</h3>
+            <p class="calculator-amount" id="investment-balance"></p>
+            <dl class="calculator-breakdown">
+              <dt>Totaal ingelegd</dt><dd id="investment-contributed"></dd>
+              <dt>Groei in dit voorbeeld</dt><dd id="investment-gain"></dd>
+            </dl>
+          </div>
+          <p class="calculator-assumptions">Voorbeeld met 4% rendement per jaar, zonder kosten, belasting en inflatie. U kunt uw inleg geheel of gedeeltelijk verliezen.</p>
+        </div>
+      </div>
     </div>
   </section>
   <section class="landing-links" aria-labelledby="beleggen-aanpak">
@@ -44,7 +82,7 @@
         </article>
         <article class="principle-card">
           <h3>Risico, kennis en ervaring</h3>
-          <p>We bespreken uw ervaring en hoeveel verlies u kunt en wilt dragen. U kunt uw inleg geheel of gedeeltelijk verliezen.</p>
+          <p>We bespreken uw ervaring en hoeveel verlies u kunt en wilt dragen.</p>
         </article>
         <article class="principle-card">
           <h3>Fondsen en uw voorkeuren</h3>
@@ -54,18 +92,16 @@
       </div>
     </div>
   </section>
-  <section class="page-cta" aria-labelledby="beleggen-gesprek">
-    <div class="wrap">
-      <h2 id="beleggen-gesprek">Uw plannen bespreken?</h2>
-      <p>Bespreek uw plannen in een kennismakingsgesprek. Bekijk de vergelijkingskaart voor de diensten en kosten.</p>
+  <section class="page-cta">
+    <div class="wrap page-actions">
       <a class="btn btn-light" href="index.html#contact">Kennismaken<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-      <p><a href="vergelijken.html#vermogenskaart">Vergelijkingskaart Vermogen opbouwen<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
+      <a href="vergelijken.html#vermogenskaart">Bekijk de advieskosten</a>
     </div>
   </section>
 </main>
 <footer class="site-footer"><div class="wrap">
 <div class="footer-top"><a class="brand" href="index.html" aria-label="VermogenKompas, naar de startpagina"><svg class="icon mark" aria-hidden="true"><use href="#i-compass"/></svg><span>Vermogen<span>Kompas</span></span></a><nav class="footer-links" aria-label="Navigatie onderaan"><a href="index.html#overwaarde">Overwaarde</a><a href="index.html#werkwijze">Onze aanpak</a><a href="vergelijken.html">Vergelijkingskaart</a><a href="over-ons.html">Over ons</a><a href="missie-duurzaamheid.html">Missie en duurzaamheid</a><a href="onze-keuzes.html">Onze keuzes</a><a href="klachten.html">Klachten</a><a href="index.html#contact">Kennismaken</a></nav></div>
-<div class="footer-bottom"><p>VermogenKompas helpt 50-plussers om een passende volgende stap te vinden voor hun woning en vermogen. De informatie is bedoeld als oriëntatie en vervangt geen persoonlijk financieel advies.</p><span>© <span id="year">2026</span> VermogenKompas</span></div>
+<div class="footer-bottom"><p>Schoolconcept. Geen persoonlijk financieel advies.</p><span>© <span id="year">2026</span> VermogenKompas</span></div>
 <nav class="footer-legal" aria-label="Juridische informatie"><a href="wettelijke-kaders.html">Wettelijke kaders</a></nav>
 <details class="about-disclosure"><summary>Conceptgegevens voor dit schoolproject</summary><p>VermogenKompas, Kompaslaan 65, 2595 AB Den Haag. Telefoon 070 000 0065. E-mail info@vermogenkompas.example. Deze adresgegevens en contactgegevens zijn fictief en uitsluitend opgenomen voor het concept.</p></details>
 </div></footer><script src="site.js"></script><script src="navigation.js"></script></body></html>
