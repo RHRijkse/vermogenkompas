@@ -56,13 +56,16 @@
 @media(max-width:1150px){.hero-copy{padding:32px}.hero-visual{min-height:460px}.overview-heading{display:block}.overview-heading p{margin-top:10px;max-width:none}.overview-card{padding:20px;gap:12px}.overview-card h3{font-size:1rem}.overview-bottom{align-items:flex-start;flex-direction:column;gap:10px}}
 @media(max-width:930px){.overview-card{flex-direction:column}.hero-copy h1{font-size:2.45rem}}
 @media(max-width:760px){.hero-copy{padding:30px 25px}.hero-copy h1{font-size:clamp(2rem,7vw,2.75rem)}.hero-copy>p{font-size:.96rem;line-height:1.65}.hero-actions>.btn{font-size:.86rem;padding-inline:16px}.hero-visual{min-height:0;height:200px;border-radius:50px 0 0 0}.hero-visual>img{object-position:70% 40%}.hero-caption{padding:12px 16px;bottom:14px;left:14px;right:14px}.hero-caption strong{font-size:.95rem}.hero-caption small{font-size:.7rem}.caption-icon{width:36px;height:36px}.home-overview{padding-top:28px}.overview-heading h2{font-size:1.5rem}.overview-grid{grid-template-columns:1fr;gap:12px}.overview-card{flex-direction:row;padding:20px;gap:16px}.overview-card h3{font-size:1.1rem}.overview-card p{margin-bottom:10px;font-size:.9rem}.overview-link{font-size:.84rem}.overview-bottom{padding-top:17px}.overview-bottom .text-link{line-height:1.6}.overview-bottom .text-link .icon{flex-shrink:0}}
-@media(max-width:760px){.hero-visual{display:none}.hero-copy h1{font-size:2rem}}
+@media(max-width:760px){.hero-copy h1{font-size:2rem}}
 @media print{.home-overview{display:none!important}}
 
 .footer-legal{margin:20px 0 0;font-size:.8rem}.footer-legal a{color:var(--muted);text-underline-offset:4px}.footer-legal a:hover{color:var(--green)}
 </style>
 
-<link rel="stylesheet" href="navigation.css"></head>
+<link rel="stylesheet" href="navigation.css">
+<link rel="stylesheet" href="home.css">
+<script src="home.js" defer></script>
+</head>
 <body>
 <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
 <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m16.2 7.8-2.8 5.6-5.6 2.8 2.8-5.6 5.6-2.8Z"/></symbol>
@@ -103,7 +106,10 @@
 </div>
 </div>
 <div class="hero-visual">
-<img src="https://images.unsplash.com/photo-1514415008039-efa173293080?w=1800&q=85" alt="Een stel geniet samen van een ontspannen moment buiten." width="5429" height="3611" fetchpriority="high">
+<img src="images/home/woonstap.webp"
+  srcset="images/home/woonstap-640.webp 640w, images/home/woonstap.webp 1200w"
+  sizes="(max-width: 760px) calc(100vw - 28px), (max-width: 1440px) 49vw, 690px"
+  alt="Een stel geniet samen van een ontspannen moment buiten." width="1200" height="798" fetchpriority="high">
 </div>
 </div>
 </section>
@@ -111,9 +117,27 @@
 <div class="wrap">
 <div class="overview-heading"><h2 id="overview-title">Waar kunnen we u bij helpen?</h2></div>
 <div class="overview-grid">
-<a class="overview-card service-contact" href="#contact" data-topic="Woonadvies en hypotheek"><svg class="icon overview-icon" aria-hidden="true"><use href="#i-home"/></svg><div><h3>Wonen &amp; hypotheek</h3><p>Blijven of verhuizen? Ontdek wat past bij uw wensen en maandlasten.</p><span class="overview-link">Bespreek uw woonplannen<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span></div></a>
-<a class="overview-card service-contact" href="#contact" data-topic="Overwaarde en vermogen"><svg class="icon overview-icon" aria-hidden="true"><use href="#i-wallet"/></svg><div><h3>Overwaarde &amp; vermogen</h3><p>Wat kan uw overwaarde betekenen voor uw plannen en financiële ruimte?</p><span class="overview-link">Bespreek uw mogelijkheden<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span></div></a>
-<a class="overview-card service-contact" href="#contact" data-topic="Beleggingsadvies"><svg class="icon overview-icon" aria-hidden="true"><use href="#i-chart"/></svg><div><h3>Beleggen voor later</h3><p>Verken wat past bij uw doelen, uw termijn en het risico dat u wilt nemen.</p><span class="overview-link">Bespreek uw vragen<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span></div></a>
+<a class="overview-card service-contact" href="#contact" data-topic="Woonadvies en hypotheek">
+  <div class="overview-photo"><img src="images/home/wonen.webp" width="840" height="560" alt="" loading="lazy" decoding="async"></div>
+  <div class="overview-copy">
+    <svg class="icon overview-icon" aria-hidden="true"><use href="#i-home"/></svg>
+    <div><h3>Wonen &amp; hypotheek</h3><p>Blijven of verhuizen? Ontdek wat past bij uw wensen en maandlasten.</p><span class="overview-link">Bespreek uw woonplannen<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span></div>
+  </div>
+</a>
+<a class="overview-card service-contact" href="#contact" data-topic="Overwaarde en vermogen">
+  <div class="overview-photo"><img src="images/home/overwaarde.webp" width="840" height="560" alt="" loading="lazy" decoding="async"></div>
+  <div class="overview-copy">
+    <svg class="icon overview-icon" aria-hidden="true"><use href="#i-wallet"/></svg>
+    <div><h3>Overwaarde &amp; vermogen</h3><p>Wat kan uw overwaarde betekenen voor uw plannen en financiële ruimte?</p><span class="overview-link">Bespreek uw mogelijkheden<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span></div>
+  </div>
+</a>
+<a class="overview-card service-contact" href="#contact" data-topic="Beleggingsadvies">
+  <div class="overview-photo"><img src="images/home/beleggen.webp" width="840" height="560" alt="" loading="lazy" decoding="async"></div>
+  <div class="overview-copy">
+    <svg class="icon overview-icon" aria-hidden="true"><use href="#i-chart"/></svg>
+    <div><h3>Beleggen voor later</h3><p>Verken wat past bij uw doelen, uw termijn en het risico dat u wilt nemen.</p><span class="overview-link">Bespreek uw vragen<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span></div>
+  </div>
+</a>
 </div>
 
 </div>
