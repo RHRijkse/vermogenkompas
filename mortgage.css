@@ -126,11 +126,17 @@
 }
 
 .mortgage-terms-intro {
-  max-width: 760px;
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px 36px;
   margin-bottom: 28px;
 }
 
+.mortgage-terms-intro > div { flex: 1 1 550px; max-width: 760px; }
 .mortgage-terms-intro p { margin-top: 14px; }
+.mortgage-terms-intro img { display: block; max-width: 100%; height: auto; }
 
 .mortgage-terms-highlights {
   display: grid;
