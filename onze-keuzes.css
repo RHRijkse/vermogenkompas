@@ -9,6 +9,7 @@
 .criterion-card{padding:28px;border:1px solid var(--line);border-radius:14px;background:#fff}
 .criterion-card h3{font-size:1.25rem;margin-bottom:12px;overflow-wrap:anywhere}
 .criterion-card p{font-size:.92rem}
+.choices-provider-link{margin-top:22px}
 .accountability{margin-top:36px;border:1px solid var(--line);border-radius:14px;background:var(--pale);overflow:hidden}
 .accountability summary{display:flex;align-items:center;justify-content:space-between;gap:25px;padding:27px 32px;cursor:pointer;list-style:none}.accountability summary::-webkit-details-marker{display:none}.accountability summary small{display:block;color:var(--green);font-size:.73rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;margin-bottom:5px}.accountability summary strong{font-size:1.2rem;font-weight:600;letter-spacing:-.025em}.accountability-plus{font-size:1.7rem;font-weight:400;transition:transform .25s}.accountability[open] .accountability-plus{transform:rotate(45deg)}
 .accountability-content{padding:0 32px 32px}.matrix-note,.matrix-method,.matrix-evidence{font-size:.85rem;line-height:1.65}.matrix-note{max-width:940px;padding-top:24px;border-top:1px solid #cbd8c4}.matrix-note strong{color:var(--navy)}
