@@ -118,3 +118,96 @@
 .mc-table th:first-child, .mc-table td:first-child, .mc-table caption { text-align: left; }
 .mc-table caption { padding: 12px 0; }
 .mortgage-section [hidden] { display: none !important; }
+.mortgage-section:target, .mortgage-terms:target { scroll-margin-top: 0; }
+
+.mortgage-terms {
+  padding-block: clamp(44px, 7vw, 86px);
+  background: var(--pale);
+}
+
+.mortgage-terms-intro {
+  max-width: 760px;
+  margin-bottom: 28px;
+}
+
+.mortgage-terms-intro p { margin-top: 14px; }
+
+.mortgage-terms-highlights {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  padding: 0;
+  margin: 0 0 40px;
+  list-style: none;
+}
+
+.mortgage-terms-highlights li {
+  padding: clamp(20px, 3vw, 30px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--white);
+}
+
+.mortgage-terms-icon {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 16px;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--pale);
+  color: var(--green);
+}
+
+.mortgage-terms-highlights h3 {
+  margin-bottom: 8px;
+  font-size: 1.25rem;
+}
+
+.mortgage-terms-details, .mortgage-terms-sources { max-width: 850px; }
+.mortgage-terms-details h3 { margin-bottom: 16px; }
+.mortgage-terms-details details { border-bottom: 1px solid #c3d0c0; }
+.mortgage-terms-details details:first-of-type { border-top: 1px solid #c3d0c0; }
+
+.mortgage-terms-details summary {
+  min-height: 48px;
+  padding-block: 14px;
+  color: var(--green);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.mortgage-terms-details summary:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.mortgage-terms-details details > div { padding: 0 0 18px 20px; }
+.mortgage-terms-details p + p { margin-top: 10px; }
+
+.mortgage-terms-sources {
+  margin-top: 28px;
+  font-size: .9rem;
+}
+
+.mortgage-terms-sources ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  padding: 0;
+  margin: 10px 0 0;
+  list-style: none;
+}
+
+.mortgage-terms-sources a {
+  color: var(--green);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+@media (max-width: 760px) {
+  .mortgage-terms-highlights {
+    grid-template-columns: 1fr;
+    margin-bottom: 30px;
+  }
+}
