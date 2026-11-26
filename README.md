@@ -70,8 +70,8 @@ Op `vergelijken.html` staan downloadbare kaarten voor Hypotheek en Vermogen opbo
 Het concept vergelijkt hypotheken van 12 aanbieders en beleggingsfondsen van 8 aanbieders en claimt daarom geen advies op onafhankelijke basis. Hypotheekadvies en bemiddeling voor een volgende koopwoning in loondienst: gemiddeld € 2.950. Alleen advies: € 1.950. Particulier vermogensadvies: € 1.350. De webpagina bevat ook alle overige tariefcategorieën, uitsluitingen en optionele onderhoudstarieven. De voorbeeldgemiddelden zijn geen historische klantgemiddelden.
 
 
-## Onze keuzes en navigatie
+## Intranet en navigatie
 
-`onze-keuzes.html` legt per dienst uit hoe maatschappelijke betrokkenheid, Bad Press en duurzaamheidsbeleid worden beoordeeld. Het onderdeel Verantwoording bevat aparte selectiematrices voor hypotheek en beleggen met een gedeeld beoordelingskader voor een 4 en een 8. Aanbieders, producten, scores, weging, totaalscores, bronnen en onderbouwing worden ingevuld zodra het onderzoek is aangeleverd. Voeg zo nodig rijen toe en verwijder het tijdelijke `aria-label` zodra een cel is ingevuld.
+`intranet.html` bevat de selectiecriteria voor hypotheek en beleggen en twee gewogen selectiematrices voor vermogensbeheerders. Eerdere links naar `onze-keuzes.html` verwijzen naar de nieuwe pagina.
 
 Alle pagina’s gebruiken dezelfde headeropbouw, `navigation.css` en `navigation.js`. Het menu staat links, het logo met de link naar de startpagina staat in het midden en Kennismaken staat rechts. Het menu sluit met het icoon, Escape, een navigatielink of een klik buiten de header. Gesloten links zijn met `inert` uitgesloten van toetsenbordbediening. Korte animaties zijn zichtbaar voor alle bezoekers. Zonder JavaScript worden alle menulinks zichtbaar weergegeven. De startpagina behoudt haar eigen script voor de wooncheck en het kennismakingsformulier.
